@@ -7,7 +7,6 @@ import com.ubersoftink.datingapp.ui.navigation.DatingNavHost
 
 /*enum class DatingAppScreens{
     StartScreen,
-    Home,
     SignUp,
     Number,
     Code,   //verification code

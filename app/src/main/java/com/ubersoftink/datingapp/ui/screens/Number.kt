@@ -1,0 +1,18 @@
+package com.ubersoftink.datingapp.ui.screens
+
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.tooling.preview.Preview
+import com.ubersoftink.datingapp.R
+import com.ubersoftink.datingapp.ui.navigation.NavigationDestination
+
+object NumberDestination: NavigationDestination{
+    override val route = "number"
+    override val titleRes = R.string.number
+}
+
+@Composable
+fun NumberScreen(){}
+
+@Composable
+@Preview
+fun NumberScreenPreview(){}
