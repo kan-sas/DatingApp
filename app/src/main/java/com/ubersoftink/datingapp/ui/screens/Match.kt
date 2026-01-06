@@ -5,14 +5,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.ubersoftink.datingapp.R
 import com.ubersoftink.datingapp.ui.navigation.NavigationDestination
 
-object ProfileDetailsDestination: NavigationDestination{
-    override val route = "profile details"
-    override val titleRes = R.string.profile_details
+object MatchDestination: NavigationDestination{
+    override val route = "match"
+    override val titleRes = R.string.match
 }
 
 @Composable
-fun ProfileDetailsScreen(){}
+fun MatchScreen(){}
 
-@Composable
 @Preview
-fun ProfileDetailsScreenPreview(){}
+@Composable
+fun MatchScreenPreview(){}

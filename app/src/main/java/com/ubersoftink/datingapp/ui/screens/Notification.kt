@@ -1,18 +1,19 @@
 package com.ubersoftink.datingapp.ui.screens
 
+import android.app.Notification
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.ubersoftink.datingapp.R
 import com.ubersoftink.datingapp.ui.navigation.NavigationDestination
 
-object ProfileDetailsDestination: NavigationDestination{
-    override val route = "profile details"
-    override val titleRes = R.string.profile_details
+object NotificationDestination: NavigationDestination{
+    override val route = "notification"
+    override val titleRes = R.string.notification
 }
 
 @Composable
-fun ProfileDetailsScreen(){}
+fun NotificationScreen(){}
 
-@Composable
 @Preview
-fun ProfileDetailsScreenPreview(){}
+@Composable
+fun NotificationScreenPreview(){}
