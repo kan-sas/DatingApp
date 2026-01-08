@@ -1,4 +1,4 @@
-package com.ubersoftink.datingapp.ui.screens
+package com.ubersoftink.datingapp.ui.screens.mainscreens
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview

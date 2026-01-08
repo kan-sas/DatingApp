@@ -1,18 +1,18 @@
-package com.ubersoftink.datingapp.ui.screens
+package com.ubersoftink.datingapp.ui.screens.mainscreens
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.ubersoftink.datingapp.R
 import com.ubersoftink.datingapp.ui.navigation.NavigationDestination
 
-object MatchesDestination: NavigationDestination{
-    override val route = "matches"
-    override val titleRes = R.string.matches
+object MainScreenDestination: NavigationDestination{
+    override val route = "main"
+    override val titleRes = R.string.main_screen
 }
 
 @Composable
-fun MatchesScreen(){}
+fun MainScreen(){}
 
 @Preview
 @Composable
-fun MatchesScreenPreview(){}
+fun MainScreenPreview(){}

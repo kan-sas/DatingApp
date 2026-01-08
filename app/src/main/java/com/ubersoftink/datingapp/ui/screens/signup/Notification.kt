@@ -1,6 +1,5 @@
-package com.ubersoftink.datingapp.ui.screens
+package com.ubersoftink.datingapp.ui.screens.signup
 
-import android.app.Notification
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.ubersoftink.datingapp.R

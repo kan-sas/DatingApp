@@ -4,8 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import com.ubersoftink.datingapp.ui.screens.StartDestination
-import com.ubersoftink.datingapp.ui.screens.StartScreen
+import com.ubersoftink.datingapp.ui.screens.signup.StartDestination
 
 @Composable
 fun DatingNavHost(

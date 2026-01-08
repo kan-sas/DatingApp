@@ -1,18 +1,18 @@
-package com.ubersoftink.datingapp.ui.screens
+package com.ubersoftink.datingapp.ui.screens.signup
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.ubersoftink.datingapp.R
 import com.ubersoftink.datingapp.ui.navigation.NavigationDestination
 
-object SignUpDestination: NavigationDestination{
-    override val route = "sign up"
-    override val titleRes = R.string.sign_up
+object NumberDestination: NavigationDestination{
+    override val route = "number"
+    override val titleRes = R.string.number
 }
 
 @Composable
-fun SignUpScreen(){}
+fun NumberScreen(){}
 
 @Composable
 @Preview
-fun SignUpScreenPreview(){}
+fun NumberScreenPreview(){}
