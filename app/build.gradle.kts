@@ -3,7 +3,6 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     id("com.google.dagger.hilt.android") version "2.57.1" apply false
-    id("com.google.devtools.ksp") version "2.2.0-2.0.2"
 }
 
 android {
@@ -55,22 +54,17 @@ dependencies {
     implementation(libs.androidx.compose.ui.text.google.fonts)
 
     //Navigation
-    implementation("androidx.navigation:navigation-compose:${rootProject.extra["nav_version"]}")
+    implementation(libs.androidx.navigation.compose)
 
     // Retrofit
-    implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0")
-    implementation("com.squareup.retrofit2:retrofit:2.11.0")
-    implementation("io.coil-kt:coil-compose:2.7.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.0")
-
-    // Room
-    implementation("androidx.room:room-runtime:${rootProject.extra["room_version"]}")
-    ksp("androidx.room:room-compiler:${rootProject.extra["room_version"]}")
-    implementation("androidx.room:room-ktx:${rootProject.extra["room_version"]}")
+    implementation(libs.retrofit2.kotlinx.serialization.converter)
+    implementation(libs.retrofit)
+    implementation(libs.coil.compose)
+    implementation(libs.kotlinx.serialization.json)
 
     //Dagger-Hilt
-    implementation("com.google.dagger:hilt-android:2.57.1")
-    ksp("com.google.dagger:hilt-android-compiler:2.57.1")
+    implementation(libs.hilt.android)
+    //ksp(libs.hilt.android.compiler)
 
     testImplementation(libs.junit)
 

@@ -1,12 +1,10 @@
 package com.ubersoftink.datingapp.data.models
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 import java.util.Date
 
-@Entity
+//@Entity
 data class User(
-    @PrimaryKey(autoGenerate = true)
+   // @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val name: String,
     val mobileNumber: Int,          //сделать маску
