@@ -61,10 +61,14 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.coil.compose)
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.converter.gson)
+    implementation(libs.gson)
 
     //Dagger-Hilt
     implementation(libs.hilt.android)
-    //ksp(libs.hilt.android.compiler)
+
+    //OkHttp
+    implementation(libs.logging.interceptor)
 
     testImplementation(libs.junit)
 
