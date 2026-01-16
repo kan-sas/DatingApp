@@ -68,9 +68,9 @@ fun SuccessScreen(
     contentPadding: PaddingValues = PaddingValues(0.dp),
     ){
     LazyVerticalGrid(
-        columns = GridCells.FixedSize(size = 180.dp),
+        columns = GridCells.FixedSize(size = 190.dp),
         modifier =modifier
-            .padding(horizontal = 16.dp)
+            .padding(horizontal = 4.dp)
             .fillMaxSize()
         ,
         contentPadding = contentPadding,
@@ -87,7 +87,7 @@ fun CatCard(
     cat: CatResponse,
 ){
     Card(
-        modifier = modifier,
+        modifier = modifier.padding(8.dp),
         shape = MaterialTheme.shapes.medium,
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
     ){
