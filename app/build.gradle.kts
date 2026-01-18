@@ -2,8 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    id("kotlin-kapt")
-    alias(libs.plugins.hilt)
+    id("com.google.dagger.hilt.android") version "2.57.1" apply false
 }
 
 android {
@@ -53,7 +52,6 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.ui.text.google.fonts)
-    implementation(libs.androidx.lifecycle.viewmodel.compose)
 
     //Navigation
     implementation(libs.androidx.navigation.compose)
@@ -63,17 +61,10 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.coil.compose)
     implementation(libs.kotlinx.serialization.json)
-    implementation(libs.converter.gson)
-    implementation(libs.gson)
-    implementation(libs.androidx.compose.runtime.livedata)
 
     //Dagger-Hilt
     implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
-    implementation(libs.hilt.navigation.compose)
-
-    //OkHttp
-    implementation(libs.logging.interceptor)
+    //ksp(libs.hilt.android.compiler)
 
     testImplementation(libs.junit)
 
