@@ -1,23 +1,5 @@
 <resources>
     <string name="app_name">Dating App</string>
-    <string name="welcome">Welcome!</string>
-    <string name="sign_up">Sign Up</string>
-    <string name="number">Enter your phone number</string>
-    <string name="verify_code">Verification code</string>
-    <string name="profile_details">Profile details</string>
-    <string name="calendar">Calendar</string>
-    <string name="sex">Your sex</string>
-    <string name="passions">Your interests</string>
-    <string name="friends">Friends</string>
-    <string name="notification">Notifications</string>
-    <string name="main_screen">Discover</string>
-    <string name="match">Match</string>
-    <string name="filters">Filters</string>
-    <string name="matches">Matches</string>
-    <string name="messages">Messages</string>
-    <!--Исправить эту часть на ссылки -->
-    <string name="chat">Chat</string>
-    <string name="stories">Stories</string>
-    <string name="profile">Profile</string>
     <string name="photo">Photo</string>
+    <string name="cat_picture">A Cat</string>
 </resources>
