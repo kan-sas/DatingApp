@@ -17,7 +17,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -34,33 +33,31 @@ import coil.request.ImageRequest
 import com.ubersoftink.datingapp.R
 import com.ubersoftink.datingapp.data.models.CatResponse
 import com.ubersoftink.datingapp.ui.viewmodels.CatsListViewModel
+import com.ubersoftink.datingapp.utils.NetworkResult
 
 @Composable
 fun CatsListScreen(
     modifier: Modifier = Modifier,
     catViewModel: CatsListViewModel,
 ){
-    val catListUi by catViewModel.catListUi.collectAsState()
+    val catListUi = catViewModel.catListUi.collectAsState().value
 
     Box(
         modifier = modifier.fillMaxSize()
     ) {
-        SuccessScreen(
-            catResponses = catListUi.catList,
-        )
-       /* when (state) {
+        when (catListUi) {
             is NetworkResult.Success -> {
-                SuccessScreen(catResponses = state.data ?: listOf())
+                SuccessScreen(catResponses = catListUi.data ?: listOf())
             }
 
             is NetworkResult.Error -> {
-                ErrorScreen(state.message ?: "Unknown error!\nSomething went wrong :-(")
+                ErrorScreen(catListUi.message ?: "Unknown error!\nSomething went wrong :-(")
             }
 
             is NetworkResult.Loading -> {
                 LoadingScreen()
             }
-        }*/
+        }
     }
 }
 
