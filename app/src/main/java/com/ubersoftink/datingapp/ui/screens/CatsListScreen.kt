@@ -16,7 +16,8 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -33,19 +34,21 @@ import coil.request.ImageRequest
 import com.ubersoftink.datingapp.R
 import com.ubersoftink.datingapp.data.models.CatResponse
 import com.ubersoftink.datingapp.ui.viewmodels.CatsListViewModel
-import com.ubersoftink.datingapp.utils.NetworkResult
 
 @Composable
 fun CatsListScreen(
     modifier: Modifier = Modifier,
     catViewModel: CatsListViewModel,
 ){
-    val state = catViewModel.uiState.observeAsState().value ?: NetworkResult.Loading()
+    val catListUi by catViewModel.catListUi.collectAsState()
 
     Box(
         modifier = modifier.fillMaxSize()
     ) {
-        when (state) {
+        SuccessScreen(
+            catResponses = catListUi.catList,
+        )
+       /* when (state) {
             is NetworkResult.Success -> {
                 SuccessScreen(catResponses = state.data ?: listOf())
             }
@@ -57,7 +60,7 @@ fun CatsListScreen(
             is NetworkResult.Loading -> {
                 LoadingScreen()
             }
-        }
+        }*/
     }
 }
 
@@ -75,7 +78,7 @@ fun SuccessScreen(
         ,
         contentPadding = contentPadding,
     ) {
-        items(items = catResponses, key = {catResponse -> catResponse.id}){ catResponse ->
+        items(items = catResponses, key = {catResponse-> catResponse.id}){ catResponse ->
             CatCard(cat = catResponse)
         }
     }
