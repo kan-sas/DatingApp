@@ -1,5 +1,7 @@
 package com.ubersoftink.datingapp.di.modules
 
+import androidx.core.os.BuildCompat
+import com.google.gson.internal.GsonBuildConfig
 import com.ubersoftink.datingapp.network.ClientApiService
 import dagger.Module
 import dagger.Provides

@@ -1,4 +1,4 @@
-package com.ubersoftink.datingapp.di
+package com.ubersoftink.datingapp
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
