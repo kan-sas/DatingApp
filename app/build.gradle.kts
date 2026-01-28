@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -12,12 +14,29 @@ android {
         version = release(36)
     }
 
+    val localProperties = Properties()
+    val localPropertiesFile = rootProject.file("local.properties")
+    if (localPropertiesFile.exists()) {
+        localProperties.load(localPropertiesFile.inputStream())
+    }
+
     defaultConfig {
         applicationId = "com.ubersoftink.datingapp"
         minSdk = 24
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
+
+        buildConfigField(
+            "String",
+            "BASE_URL",
+            localProperties.getProperty("BASE_URL")
+        )
+        buildConfigField(
+            "String",
+            "API_KEY",
+            localProperties.getProperty("API_KEY")
+        )
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

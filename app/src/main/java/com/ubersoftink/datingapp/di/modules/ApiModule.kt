@@ -1,7 +1,6 @@
 package com.ubersoftink.datingapp.di.modules
 
-import androidx.core.os.BuildCompat
-import com.google.gson.internal.GsonBuildConfig
+import com.ubersoftink.datingapp.BuildConfig
 import com.ubersoftink.datingapp.network.ClientApiService
 import dagger.Module
 import dagger.Provides
@@ -17,9 +16,9 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object ApiModule {
 
-    private  const val BASE_URL = "https://api.thecatapi.com/v1/"
+    private  const val BASE_URL = BuildConfig.BASE_URL
 
-    private const val API_KEY = "live_2LuKx38zGShWPwKTWWYT9Oem2dScbYd7zmmjc2tVNJCp7c53Rjzcj2y5Jx0e6ft7"
+    private const val API_KEY = BuildConfig.API_KEY
 
     @Singleton
     @Provides
