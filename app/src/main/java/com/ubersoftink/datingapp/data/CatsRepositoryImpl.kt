@@ -16,6 +16,8 @@ class CatsRepositoryImpl @Inject constructor(
             clientApiService.getImages()
         }
             .onSuccess { emit(NetworkResult.Success(it)) }
-            .onFailure { emit(NetworkResult.Error(data = null, message = "Api call failed!")) }
+            .onFailure { e ->
+                emit(NetworkResult.Error(data = null, message = "Api call failed!\n${e}"))
+            }
     }
 }

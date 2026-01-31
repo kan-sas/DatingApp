@@ -54,7 +54,7 @@ fun CatCard(
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
     ){
         AsyncImage(
-            model = ImageRequest.Builder(context = LocalContext.current).data(cat.picUrl)
+            model = ImageRequest.Builder(context = LocalContext.current).data(cat.url)
                 .crossfade(true).build(),
             error = painterResource(R.drawable.ic_connection_error),
             placeholder = painterResource(R.drawable.loading_img),
@@ -70,7 +70,7 @@ fun CatCard(
 private fun CatItemPreview(){
     val cat = CatResponse(
         id = "1L",
-        picUrl = "https://cdn2.thecatapi.com/images/MTU1MTczMQ.jpg",
+        url = "https://cdn2.thecatapi.com/images/MTU1MTczMQ.jpg",
         width = 1,
         height = 1
     )
@@ -83,37 +83,37 @@ private fun CatsListScreenPreview(){
     val cats = listOf(
         CatResponse(
             id = "1L",
-            picUrl = "https://cdn2.thecatapi.com/images/MTU1MTczMQ.jpg",
+            url = "https://cdn2.thecatapi.com/images/MTU1MTczMQ.jpg",
             width = 1,
             height = 1
         ),
         CatResponse(
             id = "2L",
-            picUrl = "https://cdn2.thecatapi.com/images/MTU1MTczMQ.jpg",
+            url = "https://cdn2.thecatapi.com/images/MTU1MTczMQ.jpg",
             width = 1,
             height = 1
         ),
         CatResponse(
             id = "3L",
-            picUrl = "https://cdn2.thecatapi.com/images/MTU1MTczMQ.jpg",
+            url = "https://cdn2.thecatapi.com/images/MTU1MTczMQ.jpg",
             width = 1,
             height = 1
         ),
         CatResponse(
             id = "4L",
-            picUrl = "https://cdn2.thecatapi.com/images/MTU1MTczMQ.jpg",
+            url = "https://cdn2.thecatapi.com/images/MTU1MTczMQ.jpg",
             width = 1,
             height = 1
         ),
         CatResponse(
             id = "5L",
-            picUrl = "https://cdn2.thecatapi.com/images/MTU1MTczMQ.jpg",
+            url = "https://cdn2.thecatapi.com/images/MTU1MTczMQ.jpg",
             width = 1,
             height = 1
         ),
         CatResponse(
             id = "6L",
-            picUrl = "https://cdn2.thecatapi.com/images/MTU1MTczMQ.jpg",
+            url = "https://cdn2.thecatapi.com/images/MTU1MTczMQ.jpg",
             width = 1,
             height = 1
         ),

@@ -1,7 +1,7 @@
 package com.ubersoftink.datingapp.di.modules
 
 import com.ubersoftink.datingapp.BuildConfig
-import com.ubersoftink.datingapp.network.ClientApiService
+import com.ubersoftink.datingapp.network.ClientApiServiceImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -49,5 +49,5 @@ object ApiModule {
 
     @Singleton
     @Provides
-    fun providesCatService(retrofit: Retrofit) = retrofit.create(ClientApiService::class.java)
+    fun providesCatService(retrofit: Retrofit) = retrofit.create(ClientApiServiceImpl::class.java)
 }

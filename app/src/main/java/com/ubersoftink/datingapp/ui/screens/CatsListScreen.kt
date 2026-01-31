@@ -7,30 +7,24 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ubersoftink.datingapp.ui.viewmodels.CatsListViewModel
-import com.ubersoftink.datingapp.utils.NetworkResult
 
 @Composable
 fun CatsListScreen(
     modifier: Modifier = Modifier,
     catViewModel: CatsListViewModel = hiltViewModel()
 ){
-    val catListUi = catViewModel.catListUi.collectAsState().value
+    val catListUi = catViewModel.uiState.collectAsState()
 
     Box(
         modifier = modifier.fillMaxSize()
     ) {
-        when (catListUi) {
-            is NetworkResult.Success -> {
-                CatsListContent(catResponses = catListUi.data ?: listOf())
-            }
-
-            is NetworkResult.Error -> {
-                ErrorScreen(catListUi.message ?: "Unknown error!\nSomething went wrong :-(")
-            }
-
-            else -> {
-                LoadingScreen()
-            }
+        if(catListUi.value.isLoading){
+            LoadingScreen()
+        }
+        if(catListUi.value.errorMessage != null){
+            ErrorScreen(catListUi.value.errorMessage.toString())
+        }else{
+            CatsListContent(catResponses = catListUi.value.catsList)
         }
     }
 }
