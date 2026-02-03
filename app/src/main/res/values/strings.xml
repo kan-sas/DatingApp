@@ -2,4 +2,11 @@
     <string name="app_name">Dating App</string>
     <string name="photo">Photo</string>
     <string name="cat_picture">A Cat</string>
+    <string name="app_logo_desc">App logo</string>
+    <string name="sign_up_to_continue">Sign up to continue</string>
+    <string name="continue_with_email">Continue with email</string>
+    <string name="use_phone_number">Use phone number</string>
+    <string name="or_sign_up_with">or sign up with</string>
+    <string name="terms_of_use">Terms of use</string>
+    <string name="privacy_policy">Privacy Policy</string>
 </resources>
