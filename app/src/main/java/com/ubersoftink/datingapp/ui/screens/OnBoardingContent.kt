@@ -67,13 +67,12 @@ fun OnBoardingContent(
     )
 
     Column(
-        modifier = modifier.fillMaxSize()
+        modifier = modifier.fillMaxSize().padding(bottom = 30.dp),
+        verticalArrangement = Arrangement.Bottom
     ) {
         HorizontalPager(
             state = pagerState,
             contentPadding = PaddingValues(horizontal = 55.dp),
-            modifier = modifier
-                .padding(top = 60.dp),
         ) { page ->
             Column(
                 modifier = modifier
@@ -96,7 +95,7 @@ fun OnBoardingContent(
                 .fillMaxWidth()
                 .padding(horizontal = 50.dp),
             shape = RoundedCornerShape(12.dp),
-            colors = ButtonDefaults.buttonColors(primaryContainerDark)
+            colors = ButtonDefaults.buttonColors(primaryContainerDark),
         ) {
             Text(
                 text = stringResource(R.string.create_an_account),
@@ -110,6 +109,7 @@ fun OnBoardingContent(
                 .padding(vertical = 28.dp)
                 .fillMaxWidth(),
             horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.Bottom,
         ) {
             Text(
                 text = stringResource(R.string.already_have_an_account),
@@ -158,7 +158,7 @@ fun PageContent(
         textAlign = TextAlign.Center,
         modifier = modifier
             .fillMaxWidth()
-            .padding(bottom = 16.dp, top = 44.dp),
+            .padding(bottom = 16.dp, top = 40.dp),
         style = TextStyle.Default,
         fontWeight = FontWeight.Bold,
         fontSize = 26.sp,
