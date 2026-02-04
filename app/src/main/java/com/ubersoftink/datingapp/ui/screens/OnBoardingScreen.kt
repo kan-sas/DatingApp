@@ -2,6 +2,7 @@ package com.ubersoftink.datingapp.ui.screens
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -17,7 +18,7 @@ fun OnBoardingScreen(
 ){
     val catListUi = catViewModel.uiState.collectAsState()
 
-    Surface(color = onPrimaryContainerLight) {
+    Surface(color = MaterialTheme.colorScheme.surface) {
         Box(
             modifier = modifier.fillMaxSize(),
         ) {

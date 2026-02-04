@@ -22,6 +22,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -32,12 +33,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.util.lerp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
@@ -45,7 +44,6 @@ import com.ubersoftink.datingapp.R
 import com.ubersoftink.datingapp.data.models.CatResponse
 import com.ubersoftink.datingapp.ui.theme.primaryContainerDark
 import com.ubersoftink.datingapp.ui.theme.primaryContainerDarkMediumContrast
-import com.ubersoftink.datingapp.ui.theme.surfaceDark
 import com.ubersoftink.datingapp.ui.theme.surfaceDimLightHighContrast
 import kotlin.math.absoluteValue
 
@@ -67,7 +65,7 @@ fun OnBoardingContent(
     )
 
     Column(
-        modifier = modifier.fillMaxSize().padding(bottom = 30.dp),
+        modifier = modifier.fillMaxSize().padding(bottom = 60.dp),
         verticalArrangement = Arrangement.Bottom
     ) {
         HorizontalPager(
@@ -100,8 +98,8 @@ fun OnBoardingContent(
             Text(
                 text = stringResource(R.string.create_an_account),
                 fontWeight = FontWeight.Bold,
-                fontSize = 18.sp,
-                modifier = modifier.padding(12.dp)
+                style = MaterialTheme.typography.titleMedium,
+                modifier = modifier.padding(8.dp)
             )
         }
         Row(
@@ -113,10 +111,13 @@ fun OnBoardingContent(
         ) {
             Text(
                 text = stringResource(R.string.already_have_an_account),
+                fontWeight = FontWeight.Normal,
+                style = MaterialTheme.typography.labelLarge,
                 modifier = modifier.padding(end = 4.dp),
             )
             Text(
                 text = stringResource(R.string.sign_in),
+                style = MaterialTheme.typography.labelLarge,
                 color = primaryContainerDark,
                 fontWeight = FontWeight.Bold,
             )
@@ -159,15 +160,15 @@ fun PageContent(
         modifier = modifier
             .fillMaxWidth()
             .padding(bottom = 16.dp, top = 40.dp),
-        style = TextStyle.Default,
+        style = MaterialTheme.typography.headlineMedium,
         fontWeight = FontWeight.Bold,
-        fontSize = 26.sp,
         color = primaryContainerDark
     )
     Text(
         text = desc[page],
         textAlign = TextAlign.Center,
-        fontSize = 14.sp,
+        style = MaterialTheme.typography.labelLarge,
+        fontWeight = FontWeight.Normal,
         modifier = modifier
             .graphicsLayer(
                 alpha = lerp(
@@ -176,7 +177,7 @@ fun PageContent(
                     fraction = 1f - pageOffset.coerceIn(0f, 1f)
                 )
             ),
-        color = surfaceDark,
+        color = MaterialTheme.colorScheme.onBackground,
     )
     Row(
         Modifier
