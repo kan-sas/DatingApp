@@ -8,12 +8,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.ubersoftink.datingapp.ui.theme.onPrimaryContainerLight
 import com.ubersoftink.datingapp.ui.viewmodels.CatsListViewModel
 
 @Composable
 fun OnBoardingScreen(
     modifier: Modifier = Modifier,
+    onCreateAccountButton: () -> Unit,
+    onAuthButton: () -> Unit,
     catViewModel: CatsListViewModel = hiltViewModel()
 ){
     val catListUi = catViewModel.uiState.collectAsState()
@@ -27,7 +28,11 @@ fun OnBoardingScreen(
             }else if (catListUi.value.errorMessage != null) {
                 ErrorScreen(catListUi.value.errorMessage.toString())
             } else {
-                OnBoardingContent(catResponses = catListUi.value.catsList)
+                OnBoardingContent(
+                    catResponses = catListUi.value.catsList,
+                    onCreateAccountButton = onCreateAccountButton,
+                    onAuthButton = onAuthButton,
+                )
             }
         }
     }

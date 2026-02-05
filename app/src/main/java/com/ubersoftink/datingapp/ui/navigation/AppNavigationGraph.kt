@@ -19,7 +19,11 @@ fun AppNavGraph() {
             CatsListScreen()
         }
         composable(route = Routes.ON_BOARDING) {
-            OnBoardingScreen()
+            OnBoardingScreen(
+                onCreateAccountButton = {},
+                onAuthButton = {
+                }
+            )
         }
     }
 }

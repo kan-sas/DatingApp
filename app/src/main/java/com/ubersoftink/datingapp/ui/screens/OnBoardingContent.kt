@@ -33,6 +33,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -42,6 +43,7 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.ubersoftink.datingapp.R
 import com.ubersoftink.datingapp.data.models.CatResponse
+import com.ubersoftink.datingapp.ui.theme.backgroundLight
 import com.ubersoftink.datingapp.ui.theme.primaryContainerDark
 import com.ubersoftink.datingapp.ui.theme.primaryContainerDarkMediumContrast
 import com.ubersoftink.datingapp.ui.theme.surfaceDimLightHighContrast
@@ -50,7 +52,9 @@ import kotlin.math.absoluteValue
 @Composable
 fun OnBoardingContent(
     modifier: Modifier = Modifier,
-    catResponses: List<CatResponse>
+    catResponses: List<CatResponse>,
+    onCreateAccountButton: () -> Unit,
+    onAuthButton: () -> Unit,
 ) {
     val pagerState = rememberPagerState(pageCount = { catResponses.take(3).size })
     val titles = listOf(
@@ -88,7 +92,7 @@ fun OnBoardingContent(
             }
         }
         Button(
-            onClick = { /*navController.navigate()*/ },
+            onClick = { onCreateAccountButton },
             modifier = modifier
                 .fillMaxWidth()
                 .padding(horizontal = 50.dp),
@@ -104,7 +108,7 @@ fun OnBoardingContent(
         }
         Row(
             modifier
-                .padding(vertical = 28.dp)
+                .padding(top = 20.dp)
                 .fillMaxWidth(),
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.Bottom,
@@ -113,14 +117,19 @@ fun OnBoardingContent(
                 text = stringResource(R.string.already_have_an_account),
                 fontWeight = FontWeight.Normal,
                 style = MaterialTheme.typography.labelLarge,
-                modifier = modifier.padding(end = 4.dp),
+                modifier = modifier.padding(end = 4.dp, bottom = 14.dp),
             )
-            Text(
-                text = stringResource(R.string.sign_in),
-                style = MaterialTheme.typography.labelLarge,
-                color = primaryContainerDark,
-                fontWeight = FontWeight.Bold,
-            )
+            Card(
+                onClick = onAuthButton,
+                colors = CardDefaults.cardColors(MaterialTheme.colorScheme.surface)
+            ) {
+                Text(
+                    text = stringResource(R.string.sign_in),
+                    style = MaterialTheme.typography.labelLarge,
+                    color = primaryContainerDark,
+                    fontWeight = FontWeight.Bold,
+                )
+            }
         }
     }
 }
@@ -159,7 +168,7 @@ fun PageContent(
         textAlign = TextAlign.Center,
         modifier = modifier
             .fillMaxWidth()
-            .padding(bottom = 16.dp, top = 40.dp),
+            .padding(bottom = 16.dp, top = 48.dp),
         style = MaterialTheme.typography.headlineMedium,
         fontWeight = FontWeight.Bold,
         color = primaryContainerDark
@@ -223,5 +232,9 @@ private fun OnBoardingPreview(){
             height = 1
         ),
     )
-    OnBoardingContent(catResponses = cats)
+    OnBoardingContent(
+        catResponses = cats,
+        onCreateAccountButton = {},
+        onAuthButton = {}
+    )
 }
