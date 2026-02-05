@@ -17,6 +17,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -52,7 +53,9 @@ fun SignUpContent(
         Text(
             text = stringResource(R.string.sign_up_to_continue),
             fontWeight = FontWeight.Bold,
-            fontSize = 18.sp,
+            style = MaterialTheme.typography.titleLarge,
+            //fontSize = 18.sp,
+            color = MaterialTheme.colorScheme.onBackground,
             modifier = modifier.padding(20.dp)
         )
         Button(
@@ -65,7 +68,7 @@ fun SignUpContent(
         ) {
             Text(
                 text = stringResource(R.string.continue_with_email),
-                fontSize = 16.sp,
+                style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
                 modifier = modifier.padding(12.dp)
             )
@@ -79,7 +82,7 @@ fun SignUpContent(
         ){
             Text(
                 text = stringResource(R.string.use_phone_number),
-                fontSize = 16.sp,
+                style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
                 modifier = modifier.padding(12.dp),
                 color = primaryContainerDark,
@@ -93,6 +96,7 @@ fun SignUpContent(
             Divider(modifier.weight(1f))
             Text(
                 text = stringResource(R.string.or_sign_up_with),
+                color = MaterialTheme.colorScheme.onBackground,
                 modifier = modifier.padding(horizontal = 8.dp)
             )
             Divider(modifier.weight(1f))

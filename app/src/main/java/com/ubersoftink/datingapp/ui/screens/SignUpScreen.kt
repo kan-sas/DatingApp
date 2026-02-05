@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 @Composable
 fun SignUpScreen(
     modifier: Modifier = Modifier,
-){
+) {
     Box(
         modifier = modifier.fillMaxSize()
     ) {
