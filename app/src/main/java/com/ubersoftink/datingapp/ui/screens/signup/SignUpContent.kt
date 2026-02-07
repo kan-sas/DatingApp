@@ -1,4 +1,4 @@
-package com.ubersoftink.datingapp.ui.screens
+package com.ubersoftink.datingapp.ui.screens.signup
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -29,14 +29,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.ubersoftink.datingapp.R
 import com.ubersoftink.datingapp.ui.theme.primaryContainerDark
 import com.ubersoftink.datingapp.ui.theme.primaryContainerLightMediumContrast
 
 @Composable
 fun SignUpContent(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    enterByPhoneNumberButton: () -> Unit,
 ){
     Column(
         modifier = modifier
@@ -74,7 +74,7 @@ fun SignUpContent(
             )
         }
         OutlinedButton(
-            onClick = {},
+            onClick = { enterByPhoneNumberButton() },
             modifier = modifier
                 .fillMaxWidth()
                 .padding(top = 18.dp, bottom = 80.dp),
@@ -164,5 +164,5 @@ fun OutlinedContentButton(
 @Preview(showBackground = true)
 @Composable
 fun SignUpPreview(){
-    SignUpContent()
+    SignUpContent(enterByPhoneNumberButton = {})
 }

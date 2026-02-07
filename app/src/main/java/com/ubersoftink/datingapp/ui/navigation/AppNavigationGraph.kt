@@ -5,7 +5,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.ubersoftink.datingapp.ui.screens.CatsListScreen
-import com.ubersoftink.datingapp.ui.screens.SignUpScreen
+import com.ubersoftink.datingapp.ui.screens.number.NumberScreen
+import com.ubersoftink.datingapp.ui.screens.signup.SignUpScreen
 
 @Composable
 fun AppNavGraph() {
@@ -19,7 +20,12 @@ fun AppNavGraph() {
             CatsListScreen()
         }
         composable(route = Routes.SIGN_UP) {
-            SignUpScreen()
+            SignUpScreen(enterByPhoneNumberButton = {
+                navController.navigate(Routes.NUMBER_ENTER)
+            })
+        }
+        composable(route = Routes.NUMBER_ENTER) {
+            NumberScreen()
         }
     }
 }

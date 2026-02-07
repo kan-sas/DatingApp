@@ -9,4 +9,15 @@
     <string name="or_sign_up_with">or sign up with</string>
     <string name="terms_of_use">Terms of use</string>
     <string name="privacy_policy">Privacy Policy</string>
+    <string name="my_mobile">My mobile</string>
+    <string name="please_enter_your_valid_phone_number">Please enter your valid phone number. We will send you a 4-digit code to verify your account.</string>
+    <string name="belarus_flag">\ud83c\udde7\ud83c\uddfe</string>
+    <string name="america_flag">\ud83c\uddfa\ud83c\uddf8</string>
+    <string name="ukraine_flag">\ud83c\uddfa\ud83c\uddea</string>
+    <string name="canada_flag">\ud83c\udde8\ud83c\udde6</string>
+    <string name="georgia_flag">\ud83c\uddec\ud83c\uddea</string>
+    <string name="china_flag">\ud83c\udde8\ud83c\uddf3</string>
+    <string name="poland_flag">\ud83c\uddf5\ud83c\uddf1</string>
+    <string name="czechia_flag">\ud83c\udde8\ud83c\uddff</string>
+    <string name="continue_">Continue</string>
 </resources>
