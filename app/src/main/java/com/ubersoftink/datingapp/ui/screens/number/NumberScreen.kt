@@ -7,8 +7,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -32,7 +30,8 @@ import com.ubersoftink.datingapp.ui.theme.primaryContainerDark
 
 @Composable
 fun NumberScreen(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onContinueButton: () -> Unit,
 ){
     Column(
         modifier = modifier
@@ -57,7 +56,7 @@ fun NumberScreen(
                 .padding(vertical = 30.dp)
                 .fillMaxWidth(),
             colors = CardDefaults.cardColors(MaterialTheme.colorScheme.surface),
-            border = BorderStroke(1.dp, Color.Gray)
+            border = BorderStroke(1.dp, Color.LightGray)
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically
@@ -69,7 +68,7 @@ fun NumberScreen(
                 )
                 VerticalDivider(
                     modifier = modifier.height(24.dp),
-                    color = Color.Gray
+                    color = Color.LightGray
                 )
                 TextField(
                     value = "",
@@ -81,7 +80,7 @@ fun NumberScreen(
             }
         }
         Button(
-            onClick = {},
+            onClick = { onContinueButton },
             modifier = modifier
                 .padding(top = 40.dp)
                 .fillMaxWidth(),
@@ -101,5 +100,5 @@ fun NumberScreen(
 @Preview(showBackground = true)
 @Composable
 fun NumberScreenPreview(){
-    NumberScreen()
+    NumberScreen(onContinueButton = {})
 }

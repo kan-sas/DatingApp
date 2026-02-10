@@ -1,5 +1,6 @@
 package com.ubersoftink.datingapp.ui.screens.signup
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -19,10 +20,13 @@ import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.OutlinedIconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -79,6 +83,7 @@ fun SignUpContent(
                 .fillMaxWidth()
                 .padding(top = 18.dp, bottom = 80.dp),
             shape = RoundedCornerShape(16.dp),
+            border = BorderStroke(1.dp, Color.LightGray),
         ){
             Text(
                 text = stringResource(R.string.use_phone_number),
@@ -109,18 +114,18 @@ fun SignUpContent(
         ) {
             OutlinedContentButton(
                 onClick = {},
-                imageIcon = Icons.Filled.ThumbUp,
-                contentDesc = ""
+                painterIcon = painterResource(R.drawable.facebook_square_social_logo),
+                contentDesc = stringResource(R.string.enter_from_facebook)
             )
             OutlinedContentButton(
                 onClick = {},
-                imageIcon = Icons.Filled.Star,
-                contentDesc = ""
+                painterIcon = painterResource(R.drawable.logo_google),
+                contentDesc = stringResource(R.string.enter_from_google_account)
             )
             OutlinedContentButton(
                 onClick = {},
-                imageIcon = Icons.Filled.Call,
-                contentDesc = ""
+                painterIcon = painterResource(R.drawable.apple_logo_black),
+                contentDesc = stringResource(R.string.enter_from_apple_wtfa_shne_ne)
             )
         }
         Row(
@@ -145,18 +150,20 @@ fun SignUpContent(
 fun OutlinedContentButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    imageIcon: ImageVector,
+    painterIcon: Painter,
     contentDesc: String,
 ){
-    OutlinedButton(
+    OutlinedIconButton(
         onClick = onClick,
+        modifier = modifier.size(70.dp),
         shape = RoundedCornerShape(16.dp),
+        border = BorderStroke(1.dp, Color.LightGray)
     ) {
         Icon(
-            imageVector = imageIcon,
+            painter = painterIcon,
             contentDescription = contentDesc,
             tint = primaryContainerDark,
-            modifier = modifier.padding(vertical = 12.dp)
+            modifier = modifier.size(32.dp)
         )
     }
 }

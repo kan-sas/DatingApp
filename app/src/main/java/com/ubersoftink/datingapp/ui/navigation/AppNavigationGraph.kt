@@ -5,6 +5,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.ubersoftink.datingapp.ui.screens.CatsListScreen
+import com.ubersoftink.datingapp.ui.screens.code.CodeVerificationScreen
 import com.ubersoftink.datingapp.ui.screens.number.NumberScreen
 import com.ubersoftink.datingapp.ui.screens.signup.SignUpScreen
 
@@ -25,7 +26,14 @@ fun AppNavGraph() {
             })
         }
         composable(route = Routes.NUMBER_ENTER) {
-            NumberScreen()
+            NumberScreen(
+                onContinueButton = {navController.navigate((Routes.VERIFICATION_SCREEN))}
+            )
+        }
+        composable(route = Routes.VERIFICATION_SCREEN) {
+            CodeVerificationScreen(
+                navigateUp = { navController.navigate(Routes.NUMBER_ENTER) }
+            )
         }
     }
 }
