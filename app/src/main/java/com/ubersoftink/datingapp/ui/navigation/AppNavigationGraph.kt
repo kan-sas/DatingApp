@@ -21,7 +21,7 @@ fun AppNavGraph() {
         composable(route = Routes.ON_BOARDING) {
             OnBoardingScreen(
                 onCreateAccountButton = {},
-                onAuthButton = {
+                onNavigateToAuth  = {
                 }
             )
         }

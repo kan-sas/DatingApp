@@ -14,7 +14,7 @@ import com.ubersoftink.datingapp.ui.viewmodels.CatsListViewModel
 fun OnBoardingScreen(
     modifier: Modifier = Modifier,
     onCreateAccountButton: () -> Unit,
-    onAuthButton: () -> Unit,
+    onNavigateToAuth : () -> Unit,
     catViewModel: CatsListViewModel = hiltViewModel()
 ){
     val catListUi = catViewModel.uiState.collectAsState()
@@ -31,7 +31,7 @@ fun OnBoardingScreen(
                 OnBoardingContent(
                     catResponses = catListUi.value.catsList,
                     onCreateAccountButton = onCreateAccountButton,
-                    onAuthButton = onAuthButton,
+                    onNavigateToAuth  = onNavigateToAuth,
                 )
             }
         }
