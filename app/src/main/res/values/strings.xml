@@ -2,4 +2,13 @@
     <string name="app_name">Dating App</string>
     <string name="photo">Photo</string>
     <string name="cat_picture">A Cat</string>
+    <string name="algorithm">Algorithm</string>
+    <string name="users_going_a_vetting_process_to_ensure_you_never_match_with_bots">Users going through a vetting process to ensure you never match with bots</string>
+    <string name="create_an_account">Create an account</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="sign_in">Sign In</string>
+    <string name="matches">Matches</string>
+    <string name="premium">Premium</string>
+    <string name="we_match_you_with_people">We match you with people that have a large array of similar interests</string>
+    <string name="sign_up_today_and_enjoy_the_first_month">Sign up today and enjoy the first month of premium benefits on us</string>
 </resources>
