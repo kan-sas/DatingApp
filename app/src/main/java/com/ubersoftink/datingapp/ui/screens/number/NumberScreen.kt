@@ -26,6 +26,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ubersoftink.datingapp.R
+import com.ubersoftink.datingapp.ui.theme.AppTypography
 import com.ubersoftink.datingapp.ui.theme.primaryContainerDark
 
 @Composable
@@ -42,12 +43,12 @@ fun NumberScreen(
         Text(
             text = stringResource(R.string.my_mobile),
             fontWeight = FontWeight.Bold,
-            style = MaterialTheme.typography.displaySmall,
+            style = AppTypography.displaySmall,
             color = MaterialTheme.colorScheme.onBackground
         )
         Text(
             text = stringResource(R.string.please_enter_your_valid_phone_number),
-            style = MaterialTheme.typography.bodyMedium,
+            style = AppTypography.bodyMedium,
             color = MaterialTheme.colorScheme.onBackground,
             modifier = modifier.padding(vertical = 8.dp)
         )
@@ -90,7 +91,7 @@ fun NumberScreen(
             Text(
                 text = stringResource(R.string.continue_),
                 fontWeight = FontWeight.Bold,
-                style = MaterialTheme.typography.titleMedium,
+                style = AppTypography.titleMedium,
                 modifier = modifier.padding(vertical = 8.dp)
             )
         }

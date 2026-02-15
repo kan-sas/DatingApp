@@ -2,9 +2,11 @@ package com.ubersoftink.datingapp.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 
 import androidx.compose.ui.text.googlefonts.GoogleFont
 import androidx.compose.ui.text.googlefonts.Font
+import androidx.compose.ui.unit.sp
 import com.ubersoftink.datingapp.R
 
 val provider = GoogleFont.Provider(
@@ -37,8 +39,8 @@ val AppTypography = Typography(
     headlineLarge = baseline.headlineLarge.copy(fontFamily = displayFontFamily),
     headlineMedium = baseline.headlineMedium.copy(fontFamily = displayFontFamily),
     headlineSmall = baseline.headlineSmall.copy(fontFamily = displayFontFamily),
-    titleLarge = baseline.titleLarge.copy(fontFamily = displayFontFamily),
-    titleMedium = baseline.titleMedium.copy(fontFamily = displayFontFamily),
+    titleLarge = baseline.titleLarge.copy(fontFamily = displayFontFamily, fontSize = 20.sp),
+    titleMedium = baseline.titleMedium.copy(fontFamily = displayFontFamily, fontWeight = FontWeight.Bold),
     titleSmall = baseline.titleSmall.copy(fontFamily = displayFontFamily),
     bodyLarge = baseline.bodyLarge.copy(fontFamily = bodyFontFamily),
     bodyMedium = baseline.bodyMedium.copy(fontFamily = bodyFontFamily),

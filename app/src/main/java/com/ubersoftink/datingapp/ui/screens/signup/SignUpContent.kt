@@ -10,10 +10,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Call
-import androidx.compose.material.icons.filled.Star
-import androidx.compose.material.icons.filled.ThumbUp
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
@@ -25,15 +21,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ubersoftink.datingapp.R
+import com.ubersoftink.datingapp.ui.theme.AppTypography
 import com.ubersoftink.datingapp.ui.theme.primaryContainerDark
 import com.ubersoftink.datingapp.ui.theme.primaryContainerLightMediumContrast
 
@@ -52,13 +47,12 @@ fun SignUpContent(
         Image(
             painter = painterResource(R.drawable.app_logo),
             contentDescription = stringResource(R.string.app_logo_desc),
-            modifier.size(200.dp)
+            modifier.size(180.dp)
         )
         Text(
             text = stringResource(R.string.sign_up_to_continue),
             fontWeight = FontWeight.Bold,
-            style = MaterialTheme.typography.titleLarge,
-            //fontSize = 18.sp,
+            style = AppTypography.titleLarge,
             color = MaterialTheme.colorScheme.onBackground,
             modifier = modifier.padding(20.dp)
         )
@@ -72,7 +66,7 @@ fun SignUpContent(
         ) {
             Text(
                 text = stringResource(R.string.continue_with_email),
-                style = MaterialTheme.typography.titleMedium,
+                style = AppTypography.titleMedium,
                 fontWeight = FontWeight.Bold,
                 modifier = modifier.padding(12.dp)
             )
@@ -83,11 +77,11 @@ fun SignUpContent(
                 .fillMaxWidth()
                 .padding(top = 18.dp, bottom = 80.dp),
             shape = RoundedCornerShape(16.dp),
-            border = BorderStroke(1.dp, Color.LightGray),
+            border = BorderStroke(0.1.dp, MaterialTheme.colorScheme.outlineVariant),
         ){
             Text(
                 text = stringResource(R.string.use_phone_number),
-                style = MaterialTheme.typography.titleMedium,
+                style = AppTypography.titleMedium,
                 fontWeight = FontWeight.Bold,
                 modifier = modifier.padding(12.dp),
                 color = primaryContainerDark,
@@ -157,7 +151,7 @@ fun OutlinedContentButton(
         onClick = onClick,
         modifier = modifier.size(70.dp),
         shape = RoundedCornerShape(16.dp),
-        border = BorderStroke(1.dp, Color.LightGray)
+        border = BorderStroke(0.5.dp, MaterialTheme.colorScheme.outlineVariant)
     ) {
         Icon(
             painter = painterIcon,
