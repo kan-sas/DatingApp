@@ -18,8 +18,6 @@ import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -33,7 +31,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -45,7 +42,6 @@ import com.ubersoftink.datingapp.R
 import com.ubersoftink.datingapp.data.models.CatResponse
 import com.ubersoftink.datingapp.ui.components.ButtonWithText
 import com.ubersoftink.datingapp.ui.theme.AppTypography
-import com.ubersoftink.datingapp.ui.theme.primaryContainerDark
 import com.ubersoftink.datingapp.ui.theme.primaryContainerDarkMediumContrast
 import com.ubersoftink.datingapp.ui.theme.primaryContainerLight
 import com.ubersoftink.datingapp.ui.theme.surfaceDimLightHighContrast
@@ -60,10 +56,8 @@ fun OnBoardingContent(
 ) {
     val pagerState = rememberPagerState(pageCount = { catResponses.take(3).size })
 
-
     Column(
-        modifier = modifier.fillMaxSize().padding(bottom = 60.dp),
-        verticalArrangement = Arrangement.Bottom
+        modifier = modifier.fillMaxSize().padding(top = 60.dp),
     ) {
         HorizontalPager(
             state = pagerState,
@@ -87,31 +81,40 @@ fun OnBoardingContent(
                 desc = desc,
             )
         }
-        ButtonWithText(
-            onClick = onCreateAccountButton,
-            text = stringResource(R.string.create_an_account)
-        )
-        Row(
-            Modifier
-                .padding(top = 20.dp)
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.Bottom,
+    }
+    Box(
+        contentAlignment = Alignment.BottomCenter,
+        modifier = Modifier.fillMaxSize()
+    ) {
+        Column(
+            modifier = Modifier.padding(bottom = 64.dp)
         ) {
-            Text(
-                text = stringResource(R.string.already_have_an_account),
-                style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Normal),
-                modifier = Modifier.padding(end = 4.dp, bottom = 14.dp),
+            ButtonWithText(
+                onClick = onCreateAccountButton,
+                text = stringResource(R.string.create_an_account)
             )
-            Card(
-                onClick = onNavigateToAuth,
-                colors = CardDefaults.cardColors(MaterialTheme.colorScheme.surface)
+            Row(
+                Modifier
+                    .padding(8.dp)
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.Bottom,
             ) {
                 Text(
-                    text = stringResource(R.string.sign_in),
-                    style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Bold),
-                    color = primaryContainerLight,
+                    text = stringResource(R.string.already_have_an_account),
+                    style = AppTypography.labelLarge,
+                    modifier = Modifier.padding(end = 4.dp, bottom = 14.dp),
                 )
+                Card(
+                    onClick = onNavigateToAuth,
+                    colors = CardDefaults.cardColors(MaterialTheme.colorScheme.surface)
+                ) {
+                    Text(
+                        text = stringResource(R.string.sign_in),
+                        style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Bold),
+                        color = primaryContainerLight,
+                    )
+                }
             }
         }
     }
@@ -157,13 +160,13 @@ fun PageContent(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = 16.dp, top = 48.dp),
-            style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold),
+            style = AppTypography.headlineMedium,
             color = primaryContainerLight
         )
         Text(
             text = desc[page],
             textAlign = TextAlign.Center,
-            style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Normal),
+            style = AppTypography.labelLarge,
             modifier = Modifier
                 .graphicsLayer(
                     alpha = lerp(
