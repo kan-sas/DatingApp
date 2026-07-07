@@ -27,6 +27,8 @@ fun AppNavGraph() {
         }
         composable(route = Routes.NUMBER_ENTER) {
             NumberScreen(
+                //Убрать navController из параметров перенести во viewModel инф-у о verificationId
+                //navController = navController,
                 onContinueButton = {navController.navigate((Routes.VERIFICATION_SCREEN))}
             )
         }

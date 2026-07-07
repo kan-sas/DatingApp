@@ -2,8 +2,8 @@ package com.ubersoftink.datingapp.ui.screens.code
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -12,36 +12,68 @@ import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedIconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ubersoftink.datingapp.R
 import com.ubersoftink.datingapp.ui.theme.primaryContainerDark
+import com.ubersoftink.datingapp.ui.viewmodels.OtpAction
+import com.ubersoftink.datingapp.ui.viewmodels.OtpViewModel
 
 @Composable
 fun CodeVerificationScreen(
     modifier: Modifier = Modifier,
-    navigateUp: () -> Unit
+    navigateUp: () -> Unit,
+    viewModel: OtpViewModel = hiltViewModel<OtpViewModel>()
 ){
+    val state by viewModel.state.collectAsStateWithLifecycle()
+    val focusRequesters = remember {
+        (1..4).map { FocusRequester() }
+    }
+
+    LaunchedEffect(state.focusedIndex) {
+        state.focusedIndex?.let { index ->
+            focusRequesters.getOrNull(index)?.requestFocus()
+        }
+    }
+
+    LaunchedEffect(state.code) {
+        val allNumberEntered = state.code.none{ it == null}
+        if(allNumberEntered){
+            focusRequesters.forEach{
+                it.freeFocus()
+            }
+        }
+    }
+
     Column(
         modifier = modifier
-            .padding(40.dp)
+            .padding(28.dp)
             .fillMaxSize()
     ) {
         OutlinedIconButton(
             onClick = navigateUp,
             shape = RoundedCornerShape(16.dp),
-            modifier = modifier.size(55.dp),
+            modifier = modifier
+                .padding(16.dp)
+                .size(55.dp),
             border = BorderStroke(1.dp, Color.LightGray)
         ) {
             Icon(
@@ -53,7 +85,7 @@ fun CodeVerificationScreen(
         }
         Column(
             modifier = modifier
-                .padding(top = 50.dp)
+                .padding(top = 28.dp)
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -71,7 +103,41 @@ fun CodeVerificationScreen(
                 textAlign = TextAlign.Center,
                 color = MaterialTheme.colorScheme.onBackground
             )
-            UserCodeInput()
+            Spacer(
+                modifier = Modifier
+                    .padding(24.dp)
+            )
+            OtpInputField(
+                state = state,
+                focusRequesters = focusRequesters,
+                onAction = { action ->
+                    when(action){
+                        is OtpAction.OnEnterNumber -> {
+                            if(action.number != null){
+                                focusRequesters[action.index].freeFocus()
+                            }
+                        }
+                        else -> Unit
+                    }
+                    viewModel.onAction(action)
+                },
+            )
+            Spacer(modifier = Modifier.padding(40.dp))
+            OtpKeyboard(
+                onClick = {number ->
+                    val targetIndex = state.focusedIndex ?: 0
+                    viewModel.onAction(
+                        OtpAction.OnEnterNumber(
+                            number = number.toString().toIntOrNull(),
+                            index = targetIndex
+                        )
+                    )
+                },
+                onDeletePressed = {
+                    viewModel.onAction(OtpAction.OnKeyBoardBack)
+                }
+            )
+            Spacer(Modifier.padding(16.dp))
             Card(
                 onClick = {},
                 colors = CardDefaults.cardColors(MaterialTheme.colorScheme.surface)

@@ -12,4 +12,5 @@ enum class PhoneCode(@StringRes val countryFlag: Int, val code: Int) {
     China(R.string.china_flag, 86),
     Poland(R.string.poland_flag, 48),
     Czechia(R.string.czechia_flag, 420),
+    Russia(R.string.russia_flag, 7)
 }

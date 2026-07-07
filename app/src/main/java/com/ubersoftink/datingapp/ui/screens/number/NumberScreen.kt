@@ -1,5 +1,7 @@
 package com.ubersoftink.datingapp.ui.screens.number
 
+import android.app.Activity
+import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,22 +20,41 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import com.google.firebase.FirebaseException
+import com.google.firebase.auth.PhoneAuthCredential
+import com.google.firebase.auth.PhoneAuthOptions
+import com.google.firebase.auth.PhoneAuthProvider
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.ubersoftink.datingapp.R
 import com.ubersoftink.datingapp.ui.theme.AppTypography
 import com.ubersoftink.datingapp.ui.theme.primaryContainerDark
+import java.util.concurrent.TimeUnit
 
 @Composable
 fun NumberScreen(
     modifier: Modifier = Modifier,
     onContinueButton: () -> Unit,
+    //navController: NavController
 ){
+    var phoneNumberWithoutCode by remember { mutableStateOf("") }
+    var phoneCode by remember { mutableStateOf("") }
+    var phoneNumber = phoneCode + phoneNumberWithoutCode
+    val context = LocalContext.current
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -65,15 +86,17 @@ fun NumberScreen(
                 PhoneCodeSpinner(
                     modifier = modifier.weight(1f),
                     codeSpinnerPosition = 0,
-                    onSpinnerChange = {}
+                    onSpinnerChange = {code ->
+                        phoneCode = code.toString()
+                    }
                 )
                 VerticalDivider(
                     modifier = modifier.height(24.dp),
                     color = Color.LightGray
                 )
                 TextField(
-                    value = "",
-                    onValueChange = {},
+                    value = phoneNumberWithoutCode,
+                    onValueChange = {phoneNumberWithoutCode = it},
                     singleLine = true,
                     colors = TextFieldDefaults.colors(unfocusedContainerColor = MaterialTheme.colorScheme.surface),
                     modifier = modifier.weight(1.3f)
@@ -81,7 +104,36 @@ fun NumberScreen(
             }
         }
         Button(
-            onClick = { onContinueButton },
+            onClick = {
+                /*val options = PhoneAuthOptions.newBuilder(Firebase.auth)
+                    .setPhoneNumber(phoneNumber)
+                    .setTimeout(60L, TimeUnit.SECONDS)
+                    .setActivity(context as Activity)
+                    .setCallbacks(object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+                        override fun onVerificationCompleted(credential: PhoneAuthCredential) {
+                            Firebase.auth.signInWithCredential(credential).addOnCompleteListener {
+                                if (it.isSuccessful){
+                                    //navigate to profile details
+                                }
+                            }
+                        }
+
+                        override fun onVerificationFailed(e: FirebaseException) {
+                            Toast.makeText(context, "Verification failed: ${e.message}", Toast.LENGTH_SHORT).show()
+                        }
+
+                        override fun onCodeSent(
+                            verificationId: String,
+                            token: PhoneAuthProvider.ForceResendingToken
+                        ) {
+                            //Убрать перенести хранение verificationId во viewModel
+                            navController.currentBackStackEntry?.savedStateHandle?.set("verificationId", verificationId)
+                            onContinueButton
+                        }
+                    }).build()
+                PhoneAuthProvider.verifyPhoneNumber(options) */
+                onContinueButton()
+            },
             modifier = modifier
                 .padding(top = 40.dp)
                 .fillMaxWidth(),

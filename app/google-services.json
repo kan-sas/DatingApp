@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "483017193511",
+    "project_id": "dating-app-a2a52",
+    "storage_bucket": "dating-app-a2a52.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:483017193511:android:bf50dc401a020510e07602",
+        "android_client_info": {
+          "package_name": "com.ubersoftink.datingapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCi2JQDaXjkIvgCcoav_Y3eTRNPQMsQGyk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

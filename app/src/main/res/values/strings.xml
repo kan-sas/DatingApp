@@ -19,6 +19,7 @@
     <string name="china_flag">\ud83c\udde8\ud83c\uddf3</string>
     <string name="poland_flag">\ud83c\uddf5\ud83c\uddf1</string>
     <string name="czechia_flag">\ud83c\udde8\ud83c\uddff</string>
+    <string name="russia_flag">\uD83C\uDDF7\uD83C\uDDFA</string>
     <string name="continue_">Continue</string>
     <string name="back_to_phone_number_screen">back to phone number screen</string>
     <string name="enter_from_apple_wtfa_shne_ne">Enter from apple? wtfa? shne-ne?</string>
@@ -26,4 +27,5 @@
     <string name="enter_from_facebook">Enter from facebook</string>
     <string name="type_the_verification_code_we_ve_send_you">Type the verification code we\'ve send you</string>
     <string name="send_again">Send again</string>
+    <string name="delete_symbol">delete symbol</string>
 </resources>
