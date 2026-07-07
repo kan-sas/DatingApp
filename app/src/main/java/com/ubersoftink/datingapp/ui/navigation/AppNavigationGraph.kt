@@ -12,6 +12,7 @@ import com.ubersoftink.datingapp.ui.screens.code.CodeVerificationScreen
 import com.ubersoftink.datingapp.ui.screens.number.NumberScreen
 import com.ubersoftink.datingapp.ui.screens.signup.SignUpScreen
 import com.ubersoftink.datingapp.ui.viewmodels.OtpViewModel
+import com.ubersoftink.datingapp.ui.screens.OnBoardingScreen
 
 @Composable
 fun AppNavGraph() {
@@ -19,7 +20,7 @@ fun AppNavGraph() {
 
     NavHost(
         navController = navController,
-        startDestination = Routes.SIGN_UP
+        startDestination = Routes.ON_BOARDING
     ) {
         composable(route = Routes.CATS_LIST) {
             CatsListScreen()
@@ -53,6 +54,13 @@ fun AppNavGraph() {
                     }
                 },
                 verificationId = verificationId,
+            )
+        }
+        composable(route = Routes.ON_BOARDING) {
+            OnBoardingScreen(
+                onCreateAccountButton = {},
+                onNavigateToAuth  = {
+                }
             )
         }
     }
