@@ -67,7 +67,7 @@ fun OtpInputField(
             .fillMaxWidth()
     ) {
         Row(
-            modifier = Modifier,
+            modifier = Modifier.padding(4.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {
@@ -83,11 +83,8 @@ fun OtpInputField(
                     onNumberChange = { newNumber ->
                         onAction(OtpAction.OnEnterNumber(newNumber, index))
                     },
-                    onKeyboardBack = {
-                        onAction(OtpAction.OnKeyBoardBack)
-                    },
                     modifier = Modifier
-                        .padding(horizontal = 5.dp)
+                        .padding(horizontal = 2.dp)
                         .weight(1f)
                 )
             }
@@ -101,7 +98,6 @@ fun OtpNumberInput(
     focusRequester: FocusRequester,
     onFocusChanged: (Boolean) -> Unit,
     onNumberChange: (Int?)-> Unit,
-    onKeyboardBack: () -> Unit,
     modifier: Modifier = Modifier,
 ){
     var text by remember(number) {
@@ -142,7 +138,7 @@ fun OtpNumberInput(
             textStyle = TextStyle(
                 textAlign = TextAlign.Center,
                 fontWeight = FontWeight.Bold,
-                fontSize = 36.sp,
+                fontSize = 34.sp,
             ),
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Number
@@ -161,7 +157,7 @@ fun OtpNumberInput(
                         text = "0",
                         textAlign = TextAlign.Center,
                         color = MaterialTheme.colorScheme.outlineVariant,
-                        style = AppTypography.displaySmall,
+                        style = AppTypography.headlineLarge,
 
                         modifier = Modifier
                             .fillMaxWidth()
@@ -179,7 +175,7 @@ fun OtpNumberInput(
 private fun UserCodeInputPreview(){
     OtpInputField(
         state = OtpState(),
-        focusRequesters = (1..4).map { FocusRequester() },
+        focusRequesters = (1..6).map { FocusRequester() },
         onAction = {},
     )
 }

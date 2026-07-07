@@ -1,15 +1,18 @@
 package com.ubersoftink.datingapp.ui.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
+import com.google.firebase.auth.PhoneAuthProvider
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
 //Заменить
-private const val VALID_OTP_CODE = "1214"
+private const val VALID_OTP_CODE = "121416"
 
 class OtpViewModel: ViewModel() {
-
     private val _state = MutableStateFlow(OtpState())
     val state = _state.asStateFlow()
 
@@ -26,32 +29,42 @@ class OtpViewModel: ViewModel() {
                 enterNumber(action.number, action.index)
             }
             OtpAction.OnKeyBoardBack -> {
-                val previousIndex = getPreviousFocusedIndex(state.value.focusedIndex)
-                state.value.focusedIndex?.let {
-                    if(state.value.code[it] != null){
-                        _state.update { it.copy(
-                            code = it.code.mapIndexed { index, number ->
-                                if(index == previousIndex?.plus(1)){
-                                    null
-                                }else{
-                                    number
-                                }
-                            }
-                        ) }
+                deleteNumber()
+            }
+        }
+    }
+
+    fun updateVerificationId(verificationId: String?){
+        _state.update {
+            it.copy(verificationId = verificationId)
+        }
+    }
+
+    private fun deleteNumber(){
+        val previousIndex = getPreviousFocusedIndex(state.value.focusedIndex)
+        state.value.focusedIndex?.let {
+            if(state.value.code[it] != null){
+                _state.update { it.copy(
+                    code = it.code.mapIndexed { index, number ->
+                        if(index == previousIndex?.plus(1)){
+                            null
+                        }else{
+                            number
+                        }
                     }
-                    else{
-                        _state.update { it.copy(
-                            code = it.code.mapIndexed { index, number ->
-                                if(index == previousIndex) {
-                                    null
-                                }else{
-                                    number
-                                }
-                            },
-                            focusedIndex = previousIndex
-                        ) }
-                    }
-                }
+                ) }
+            }
+            else{
+                _state.update { it.copy(
+                    code = it.code.mapIndexed { index, number ->
+                        if(index == previousIndex) {
+                            null
+                        }else{
+                            number
+                        }
+                    },
+                    focusedIndex = previousIndex
+                ) }
             }
         }
     }
@@ -65,21 +78,48 @@ class OtpViewModel: ViewModel() {
             }
         }
         val wasNumberRemoved = number == null
-        _state.update{
+        val codeNotEmpty = newCode.none { it == null }
+        val verificationId = state.value.verificationId
+
+        _state.update {
             it.copy(
                 code = newCode,
-                focusedIndex = if(wasNumberRemoved || it.code.getOrNull(index) != null){
+                focusedIndex = if (wasNumberRemoved || it.code.getOrNull(index) != null) {
                     it.focusedIndex
-                }else{
+                } else {
                     getNextFocusedTextFieldIndex(
                         currentCode = it.code,
                         currentFocusedIndex = it.focusedIndex
                     )
                 },
-                isValid = if(newCode.none{it == null}){
-                    newCode.joinToString("") == VALID_OTP_CODE
-                }else null
             )
+        }
+
+        if(codeNotEmpty){
+            if(verificationId.isNullOrEmpty()){
+                Log.e("OtpViewModel", "Verification ID is null or empty. Cannot proceed with Firebase auth.")
+                _state.update { it.copy(isValid = false) }
+                return
+            }
+            val codeString = newCode.joinToString("")
+            try {
+                val credential = PhoneAuthProvider.getCredential(
+                    _state.value.verificationId!!,
+                    codeString
+                )
+                Firebase.auth.signInWithCredential(credential)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            _state.update {
+                                it.copy(
+                                    isValid = true
+                                )
+                            }
+                        }
+                    }
+            }catch (e: IllegalArgumentException){
+                _state.update { it.copy(isValid = false) }
+            }
         }
     }
 
@@ -94,7 +134,7 @@ class OtpViewModel: ViewModel() {
         if(currentFocusedIndex == null){
             return null
         }
-        if(currentFocusedIndex == 3){
+        if(currentFocusedIndex == 5){
             return currentFocusedIndex
         }
         return getFirstEmptyFieldIndexAfterFocusedIndex(

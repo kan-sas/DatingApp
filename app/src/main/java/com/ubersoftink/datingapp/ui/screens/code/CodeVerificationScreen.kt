@@ -1,5 +1,6 @@
 package com.ubersoftink.datingapp.ui.screens.code
 
+import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -23,13 +24,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ubersoftink.datingapp.R
@@ -41,11 +42,20 @@ import com.ubersoftink.datingapp.ui.viewmodels.OtpViewModel
 fun CodeVerificationScreen(
     modifier: Modifier = Modifier,
     navigateUp: () -> Unit,
-    viewModel: OtpViewModel = hiltViewModel<OtpViewModel>()
+    viewModel: OtpViewModel = hiltViewModel<OtpViewModel>(),
+    verificationId: String?
 ){
     val state by viewModel.state.collectAsStateWithLifecycle()
     val focusRequesters = remember {
-        (1..4).map { FocusRequester() }
+        (1..6).map { FocusRequester() }
+    }
+
+    LaunchedEffect(verificationId) {
+        if (verificationId != null) {
+            viewModel.updateVerificationId(verificationId)
+        } else {
+            Log.e("CodeVerification", "Verification ID is null")
+        }
     }
 
     LaunchedEffect(state.focusedIndex) {
@@ -65,14 +75,15 @@ fun CodeVerificationScreen(
 
     Column(
         modifier = modifier
-            .padding(28.dp)
+            .padding(vertical = 28.dp)
             .fillMaxSize()
     ) {
         OutlinedIconButton(
             onClick = navigateUp,
             shape = RoundedCornerShape(16.dp),
             modifier = modifier
-                .padding(16.dp)
+                .padding(horizontal = 28.dp)
+                .padding(top = 16.dp)
                 .size(55.dp),
             border = BorderStroke(1.dp, Color.LightGray)
         ) {
@@ -98,7 +109,7 @@ fun CodeVerificationScreen(
                 text = stringResource(R.string.type_the_verification_code_we_ve_send_you),
                 modifier = modifier
                     .padding(top = 20.dp)
-                    .padding(horizontal = 50.dp),
+                    .padding(horizontal = 80.dp),
                 style = MaterialTheme.typography.bodyLarge,
                 textAlign = TextAlign.Center,
                 color = MaterialTheme.colorScheme.onBackground
@@ -122,6 +133,25 @@ fun CodeVerificationScreen(
                     viewModel.onAction(action)
                 },
             )
+            when (state.isValid) {
+                true -> {
+                    Text(
+                        text = "OTP is valid!",
+                        color = Color.Green,
+                        fontSize = 16.sp,
+                        modifier = Modifier.padding(top = 8.dp)
+                    )
+                }
+                false -> {
+                    Text(
+                        text = "Invalid OTP. Please try again.",
+                        color = Color.Red,
+                        fontSize = 16.sp,
+                        modifier = Modifier.padding(top = 8.dp)
+                    )
+                }
+                else -> null
+            }
             Spacer(modifier = Modifier.padding(40.dp))
             OtpKeyboard(
                 onClick = {number ->
@@ -156,7 +186,5 @@ fun CodeVerificationScreen(
 @Composable
 @Preview(showBackground = true)
 fun CodeVerificationPreview(){
-    CodeVerificationScreen(
-        navigateUp = {}
-    )
+    CodeVerificationScreen(navigateUp = {}, verificationId = "")
 }

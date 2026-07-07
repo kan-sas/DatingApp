@@ -29,32 +29,38 @@ fun OtpKeyboard(
     onClick: (Char) -> Unit,
     onDeletePressed: () -> Unit,
 ){
-    NumberButtonRow(
-        sizeOfRow = 3,
-        numberOfRows = 3,
-        numbers = listOf(1,2,3,4,5,6,7,8,9),
-        onClick = onClick
-    )
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween
-    ) {
-        Spacer(modifier = Modifier.weight(2f))
-        NumberButton(
-            number = 0,
-            onClick = onClick,
-            Modifier.weight(1f)
+    Column(modifier = Modifier.padding(horizontal = 28.dp)){
+        NumberButtonRow(
+            sizeOfRow = 3,
+            numberOfRows = 3,
+            numbers = listOf(
+                1, 2, 3,
+                4, 5, 6,
+                7, 8, 9
+            ),
+            onClick = onClick
         )
-        Spacer(modifier = Modifier.weight(1f))
-        IconButton(
-            onClick = onDeletePressed,
-            Modifier.weight(1f)
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Icon(
-                painter = painterResource(R.drawable.backspace),
-                contentDescription = stringResource(R.string.delete_symbol),
-                modifier = Modifier.size(28.dp)
+            Spacer(modifier = Modifier.weight(2f))
+            NumberButton(
+                number = 0,
+                onClick = onClick,
+                Modifier.weight(1f)
             )
+            Spacer(modifier = Modifier.weight(1f))
+            IconButton(
+                onClick = onDeletePressed,
+                Modifier.weight(1f)
+            ) {
+                Icon(
+                    painter = painterResource(R.drawable.backspace),
+                    contentDescription = stringResource(R.string.delete_symbol),
+                    modifier = Modifier.size(28.dp)
+                )
+            }
         }
     }
 }
