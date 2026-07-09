@@ -11,6 +11,7 @@ import com.ubersoftink.datingapp.ui.screens.code.CodeVerificationScreen
 import com.ubersoftink.datingapp.ui.screens.number.NumberScreen
 import com.ubersoftink.datingapp.ui.screens.signup.SignUpScreen
 import com.ubersoftink.datingapp.ui.screens.OnBoardingScreen
+import com.ubersoftink.datingapp.ui.screens.profiledetails.ProfileDetailsScreen
 
 @Composable
 fun AppNavGraph() {
@@ -67,7 +68,13 @@ fun AppNavGraph() {
                 },
                 verificationId = verificationId,
                 phoneNumber = phoneNumber,
+                toProfileDetails = {
+                    navController.navigate(Routes.PROFILE_DETAILS)
+                }
             )
+        }
+        composable(route = Routes.PROFILE_DETAILS){
+            ProfileDetailsScreen()
         }
     }
 }

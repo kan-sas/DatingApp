@@ -6,4 +6,5 @@ object Routes {
     const val NUMBER_ENTER ="enter_number_screen"
     const val VERIFICATION_SCREEN = "verification_screen"
     const val ON_BOARDING = "on_boarding"
+    const val PROFILE_DETAILS = "profile_details"
 }

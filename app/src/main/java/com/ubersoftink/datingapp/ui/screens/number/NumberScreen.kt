@@ -110,5 +110,5 @@ fun NumberScreen(
 @Preview(showBackground = true)
 @Composable
 fun NumberScreenPreview(){
-    NumberScreen(onContinueButton = {} as (String, String) -> Unit)
+    NumberScreen(onContinueButton = {i, j ->})
 }

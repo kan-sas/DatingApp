@@ -45,7 +45,8 @@ fun CodeVerificationScreen(
     navigateUp: () -> Unit,
     phoneNumber: String?,
     viewModel: OtpViewModel = hiltViewModel<OtpViewModel>(),
-    verificationId: String?
+    verificationId: String?,
+    toProfileDetails: () -> Unit,
 ){
     val state by viewModel.state.collectAsStateWithLifecycle()
     val context = LocalContext.current
@@ -145,16 +146,10 @@ fun CodeVerificationScreen(
                     viewModel.onAction(action)
                 },
             )
-            when (state.isValid) {
-                true -> {
-                    Text(
-                        text = "OTP is valid!",
-                        color = Color.Green,
-                        fontSize = 16.sp,
-                        modifier = Modifier.padding(top = 8.dp)
-                    )
-                }
-                false -> {
+            state.isValid?.let{ isValid ->
+                if(isValid){
+                    toProfileDetails()
+                }else if(!isValid){
                     Text(
                         text = "Invalid OTP. Please try again.",
                         color = Color.Red,
@@ -162,7 +157,7 @@ fun CodeVerificationScreen(
                         modifier = Modifier.padding(top = 8.dp)
                     )
                 }
-                else -> null
+                else null
             }
             Spacer(modifier = Modifier.padding(40.dp))
             OtpKeyboard(
@@ -203,5 +198,5 @@ fun CodeVerificationScreen(
 @Composable
 @Preview(showBackground = true)
 fun CodeVerificationPreview(){
-    CodeVerificationScreen(navigateUp = {}, verificationId = "", phoneNumber = "")
+    CodeVerificationScreen(navigateUp = {}, verificationId = "", phoneNumber = "", toProfileDetails = {})
 }
