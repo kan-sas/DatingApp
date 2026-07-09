@@ -1,16 +1,20 @@
 package com.ubersoftink.datingapp.ui.viewmodels
 
+import android.app.Activity
+import android.content.Context
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.ViewModel
+import com.google.firebase.FirebaseException
+import com.google.firebase.auth.PhoneAuthCredential
+import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-
-//Заменить
-private const val VALID_OTP_CODE = "121416"
+import java.util.concurrent.TimeUnit
 
 class OtpViewModel: ViewModel() {
     private val _state = MutableStateFlow(OtpState())
@@ -32,6 +36,19 @@ class OtpViewModel: ViewModel() {
                 deleteNumber()
             }
         }
+    }
+
+    fun secondHasPassed(){
+        val timerSeconds = state.value.currentTime.plus(1)
+        _state.update { it.copy(
+            currentTime = timerSeconds
+        ) }
+    }
+
+    private fun resetTheTimer(){
+        _state.update { it.copy(
+            currentTime = 0
+        ) }
     }
 
     fun updateVerificationId(verificationId: String?){
@@ -67,6 +84,41 @@ class OtpViewModel: ViewModel() {
                 ) }
             }
         }
+    }
+
+    fun phoneAuthentication(
+        context: Context,
+        phoneNumber: String?
+    ){
+        val options = PhoneAuthOptions.newBuilder(Firebase.auth)
+            .setPhoneNumber(phoneNumber!!)
+            .setTimeout(60L, TimeUnit.SECONDS)
+            .setActivity(context as Activity)
+            .setCallbacks(object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+                override fun onVerificationCompleted(credential: PhoneAuthCredential) {
+                    Firebase.auth.signInWithCredential(credential).addOnCompleteListener {
+                        if (it.isSuccessful){
+                            //change to navigate to profile details
+                            //navController.navigate(Routes.SIGN_UP)
+                        }
+                    }
+                }
+
+                override fun onVerificationFailed(e: FirebaseException) {
+                    Toast.makeText(context, "Verification failed: ${e.message}", Toast.LENGTH_SHORT).show()
+                }
+
+                override fun onCodeSent(
+                    verificationID: String,
+                    token: PhoneAuthProvider.ForceResendingToken
+                ) {
+                    _state.update { it.copy(
+                        verificationId = verificationID
+                    ) }
+                }
+            }).build()
+        PhoneAuthProvider.verifyPhoneNumber(options)
+        resetTheTimer()
     }
 
     private fun enterNumber(number: Int?, index: Int){

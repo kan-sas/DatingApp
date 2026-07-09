@@ -91,6 +91,8 @@ fun OnBoardingContent(
         ) {
             ButtonWithText(
                 onClick = onCreateAccountButton,
+                modifier = Modifier
+                    .padding(horizontal = 50.dp),
                 text = stringResource(R.string.create_an_account)
             )
             Row(

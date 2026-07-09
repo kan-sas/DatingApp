@@ -37,15 +37,18 @@ import com.ubersoftink.datingapp.R
 import com.ubersoftink.datingapp.ui.theme.primaryContainerDark
 import com.ubersoftink.datingapp.ui.viewmodels.OtpAction
 import com.ubersoftink.datingapp.ui.viewmodels.OtpViewModel
+import kotlinx.coroutines.delay
 
 @Composable
 fun CodeVerificationScreen(
     modifier: Modifier = Modifier,
     navigateUp: () -> Unit,
+    phoneNumber: String?,
     viewModel: OtpViewModel = hiltViewModel<OtpViewModel>(),
     verificationId: String?
 ){
     val state by viewModel.state.collectAsStateWithLifecycle()
+    val context = LocalContext.current
     val focusRequesters = remember {
         (1..6).map { FocusRequester() }
     }
@@ -71,6 +74,11 @@ fun CodeVerificationScreen(
                 it.freeFocus()
             }
         }
+    }
+
+    LaunchedEffect(state.currentTime) {
+        delay(1000)
+        viewModel.secondHasPassed()
     }
 
     Column(
@@ -100,8 +108,12 @@ fun CodeVerificationScreen(
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            val timerSeconds = state.currentTime
+            val minutes = (timerSeconds % 3600) / 60
+            val seconds = timerSeconds % 60
+
             Text(
-                text = "00:42",
+                text = String.format("%02d:%02d", minutes, seconds),
                 style = MaterialTheme.typography.displaySmall,
                 fontWeight = FontWeight.Bold
             )
@@ -169,7 +181,12 @@ fun CodeVerificationScreen(
             )
             Spacer(Modifier.padding(16.dp))
             Card(
-                onClick = {},
+                onClick = {
+                    viewModel.phoneAuthentication(
+                        context,
+                        phoneNumber = phoneNumber
+                    )
+                },
                 colors = CardDefaults.cardColors(MaterialTheme.colorScheme.surface)
             ) {
                 Text(
@@ -186,5 +203,5 @@ fun CodeVerificationScreen(
 @Composable
 @Preview(showBackground = true)
 fun CodeVerificationPreview(){
-    CodeVerificationScreen(navigateUp = {}, verificationId = "")
+    CodeVerificationScreen(navigateUp = {}, verificationId = "", phoneNumber = "")
 }

@@ -19,7 +19,7 @@
     <string name="terms_of_use">Terms of use</string>
     <string name="privacy_policy">Privacy Policy</string>
     <string name="my_mobile">My mobile</string>
-    <string name="please_enter_your_valid_phone_number">Please enter your valid phone number. We will send you a 4-digit code to verify your account.</string>
+    <string name="please_enter_your_valid_phone_number">Please enter your valid phone number. We will send you a 6-digit code to verify your account.</string>
     <string name="belarus_flag">\ud83c\udde7\ud83c\uddfe</string>
     <string name="america_flag">\ud83c\uddfa\ud83c\uddf8</string>
     <string name="ukraine_flag">\ud83c\uddfa\ud83c\uddea</string>
