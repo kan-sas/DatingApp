@@ -1,9 +1,12 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     id("kotlin-kapt")
     alias(libs.plugins.hilt)
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -46,8 +49,10 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-    kotlinOptions {
-        jvmTarget = "11"
+    kotlin {
+        compilerOptions {
+            jvmTarget = JvmTarget.JVM_11
+        }
     }
     buildFeatures {
         compose = true
@@ -81,11 +86,21 @@ dependencies {
 
     //Dagger-Hilt
     implementation(libs.hilt.android)
+    implementation(libs.firebase.auth)
     kapt(libs.hilt.compiler)
     implementation(libs.hilt.navigation.compose)
 
     //OkHttp
     implementation(libs.logging.interceptor)
+
+    //Firebase
+    implementation(libs.firebase.auth.ktx)
+    implementation(libs.play.services.auth)
+    implementation(libs.firebase.auth)
+    implementation(platform(libs.firebase.bom))
+    implementation (libs.play.services.auth.v2070)
+    implementation (libs.play.services.auth.api.phone)
+    implementation(libs.google.firebase.appcheck.playintegrity)
 
     testImplementation(libs.junit)
 
@@ -96,4 +111,7 @@ dependencies {
 
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
+}
+kapt {
+    correctErrorTypes = true
 }
