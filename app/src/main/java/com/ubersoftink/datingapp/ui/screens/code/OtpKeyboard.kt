@@ -1,5 +1,6 @@
 package com.ubersoftink.datingapp.ui.screens.code
 
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,7 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.ubersoftink.datingapp.R
 import com.ubersoftink.datingapp.ui.components.NumberButton
-import com.ubersoftink.datingapp.ui.components.NumberButtonRow
+import com.ubersoftink.datingapp.ui.components.NumberButtonRows
 
 @Composable
 fun OtpKeyboard(
@@ -25,7 +26,7 @@ fun OtpKeyboard(
     onDeletePressed: () -> Unit,
 ){
     Column(modifier = Modifier.padding(horizontal = 28.dp)){
-        NumberButtonRow(
+        NumberButtonRows(
             sizeOfRow = 3,
             numberOfRows = 3,
             numbers = listOf(

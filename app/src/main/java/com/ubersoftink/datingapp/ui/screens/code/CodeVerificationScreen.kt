@@ -34,6 +34,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ubersoftink.datingapp.R
+import com.ubersoftink.datingapp.ui.theme.AppTypography
 import com.ubersoftink.datingapp.ui.theme.primaryContainerDark
 import com.ubersoftink.datingapp.ui.viewmodels.OtpAction
 import com.ubersoftink.datingapp.ui.viewmodels.OtpViewModel
@@ -161,7 +162,7 @@ fun CodeVerificationScreen(
             }
             Spacer(modifier = Modifier.padding(40.dp))
             OtpKeyboard(
-                onClick = {number ->
+                onClick = { number ->
                     val targetIndex = state.focusedIndex ?: 0
                     viewModel.onAction(
                         OtpAction.OnEnterNumber(
@@ -172,7 +173,7 @@ fun CodeVerificationScreen(
                 },
                 onDeletePressed = {
                     viewModel.onAction(OtpAction.OnKeyBoardBack)
-                }
+                },
             )
             Spacer(Modifier.padding(16.dp))
             Card(
@@ -188,7 +189,7 @@ fun CodeVerificationScreen(
                     text = stringResource(R.string.send_again),
                     fontWeight = FontWeight.Bold,
                     color = primaryContainerDark,
-                    style = MaterialTheme.typography.titleMedium
+                    style = AppTypography.titleMedium
                 )
             }
         }

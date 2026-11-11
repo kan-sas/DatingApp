@@ -37,4 +37,17 @@
     <string name="type_the_verification_code_we_ve_send_you">Type the verification code we\'ve send you</string>
     <string name="send_again">Send again</string>
     <string name="delete_symbol">delete symbol</string>
+    <string name="skip">Skip</string>
+    <string name="profile_details">Profile details</string>
+    <string name="change_profile_photo">Change profile photo</string>
+    <string name="default_profile_picture">Default profile picture</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="chose_birthday_date">Chose birthday date</string>
+    <string name="calendar_icon">Calendar icon</string>
+    <string name="confirm">Confirm</string>
+    <string name="birthday">Birthday</string>
+    <string name="previous_month">Previous month</string>
+    <string name="next_month">Next month</string>
+    <string name="save">Save</string>
 </resources>

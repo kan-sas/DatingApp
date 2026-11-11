@@ -74,7 +74,10 @@ fun AppNavGraph() {
             )
         }
         composable(route = Routes.PROFILE_DETAILS){
-            ProfileDetailsScreen()
+            ProfileDetailsScreen(
+                onSkipClick = {},
+                toSexScreen = {}
+            )
         }
     }
 }
