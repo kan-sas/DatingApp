@@ -1,17 +1,24 @@
 package com.ubersoftink.datingapp.ui.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import androidx.navigation.navigation
 import com.ubersoftink.datingapp.ui.screens.CatsListScreen
 import com.ubersoftink.datingapp.ui.screens.code.CodeVerificationScreen
 import com.ubersoftink.datingapp.ui.screens.number.NumberScreen
 import com.ubersoftink.datingapp.ui.screens.signup.SignUpScreen
 import com.ubersoftink.datingapp.ui.screens.OnBoardingScreen
+import com.ubersoftink.datingapp.ui.screens.profiledetails.InterestsScreen
+import com.ubersoftink.datingapp.ui.screens.profiledetails.NotificationsScreen
 import com.ubersoftink.datingapp.ui.screens.profiledetails.ProfileDetailsScreen
+import com.ubersoftink.datingapp.ui.screens.profiledetails.SexScreen
+import com.ubersoftink.datingapp.ui.viewmodels.RegistrationViewModel
 
 @Composable
 fun AppNavGraph() {
@@ -69,15 +76,62 @@ fun AppNavGraph() {
                 verificationId = verificationId,
                 phoneNumber = phoneNumber,
                 toProfileDetails = {
-                    navController.navigate(Routes.PROFILE_DETAILS)
+                    navController.navigate(Graph.REGISTRATION) {
+                        popUpTo(Routes.NUMBER_ENTER) { inclusive = true }
+                    }
                 }
             )
         }
-        composable(route = Routes.PROFILE_DETAILS){
-            ProfileDetailsScreen(
-                onSkipClick = {},
-                toSexScreen = {}
-            )
+        navigation(
+            startDestination = Routes.PROFILE_DETAILS,
+            route = Graph.REGISTRATION
+        ) {
+            composable(route = Routes.PROFILE_DETAILS) { backStackEntry ->
+                val parentEntry = remember(backStackEntry) {
+                    navController.getBackStackEntry(Graph.REGISTRATION)
+                }
+                val sharedViewModel = hiltViewModel<RegistrationViewModel>(parentEntry)
+
+                ProfileDetailsScreen(
+                    regViewModel = sharedViewModel,
+                    onSkipClick = { navController.navigate(Routes.I_AM) },
+                    toSexScreen = { navController.navigate(Routes.I_AM) }
+                )
+            }
+
+            composable(route = Routes.I_AM) { backStackEntry ->
+                val parentEntry = remember(backStackEntry) {
+                    navController.getBackStackEntry(Graph.REGISTRATION)
+                }
+                val sharedViewModel = hiltViewModel<RegistrationViewModel>(parentEntry)
+
+                SexScreen(
+                    viewModel = sharedViewModel,
+                    onBackClick = { navController.popBackStack() },
+                    onContinueClick = { navController.navigate(Routes.PASSIONS) },
+                    onSkipClick = { navController.navigate(Routes.PASSIONS) }
+                )
+            }
+
+            composable(route = Routes.PASSIONS) { backStackEntry ->
+                val parentEntry = remember(backStackEntry) {
+                    navController.getBackStackEntry(Graph.REGISTRATION)
+                }
+                val sharedViewModel = hiltViewModel<RegistrationViewModel>(parentEntry)
+
+                InterestsScreen(
+                    viewModel = sharedViewModel,
+                    onBackClick = { navController.popBackStack() },
+                    onContinueClick = { navController.navigate(Routes.ENABLE_NOTIFICATIONS) },
+                    onSkipClick = { navController.navigate(Routes.ENABLE_NOTIFICATIONS) }
+                )
+            }
+            composable(route = Routes.ENABLE_NOTIFICATIONS) { backStackEntry ->
+                NotificationsScreen(
+                    onSkipClick = { },
+                    onNotifyClick = {  }
+                )
+            }
         }
     }
 }

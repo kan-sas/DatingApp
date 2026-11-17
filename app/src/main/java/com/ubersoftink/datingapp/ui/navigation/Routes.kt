@@ -7,4 +7,10 @@ object Routes {
     const val VERIFICATION_SCREEN = "verification_screen"
     const val ON_BOARDING = "on_boarding"
     const val PROFILE_DETAILS = "profile_details"
+    const val I_AM = "i_am"
+    const val PASSIONS = "passions"
+    const val ENABLE_NOTIFICATIONS = "enable_notifications"
+}
+object Graph {
+    const val REGISTRATION = "registration_graph"
 }

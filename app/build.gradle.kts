@@ -72,6 +72,9 @@ dependencies {
     implementation(libs.androidx.compose.ui.text.google.fonts)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
 
+    //Extended Icons
+    implementation(libs.androidx.compose.material.icons.extended)
+
     //Navigation
     implementation(libs.androidx.navigation.compose)
 

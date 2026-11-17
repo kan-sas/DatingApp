@@ -34,6 +34,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ubersoftink.datingapp.R
+import com.ubersoftink.datingapp.ui.components.NavigateBackButton
 import com.ubersoftink.datingapp.ui.theme.AppTypography
 import com.ubersoftink.datingapp.ui.theme.primaryContainerDark
 import com.ubersoftink.datingapp.ui.viewmodels.OtpAction
@@ -88,22 +89,14 @@ fun CodeVerificationScreen(
             .padding(vertical = 28.dp)
             .fillMaxSize()
     ) {
-        OutlinedIconButton(
-            onClick = navigateUp,
-            shape = RoundedCornerShape(16.dp),
-            modifier = modifier
+        NavigateBackButton(
+            navigateUp = navigateUp,
+            contentDescription = stringResource(R.string.back_to_phone_number_screen),
+            modifier = Modifier
                 .padding(horizontal = 28.dp)
                 .padding(top = 16.dp)
                 .size(55.dp),
-            border = BorderStroke(1.dp, Color.LightGray)
-        ) {
-            Icon(
-                imageVector = Icons.Filled.KeyboardArrowLeft,
-                contentDescription = stringResource(R.string.back_to_phone_number_screen),
-                tint = primaryContainerDark,
-                modifier = modifier.size(32.dp)
-            )
-        }
+        )
         Column(
             modifier = modifier
                 .padding(top = 28.dp)

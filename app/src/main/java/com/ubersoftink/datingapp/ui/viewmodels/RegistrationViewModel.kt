@@ -35,4 +35,28 @@ class RegistrationViewModel: ViewModel() {
             birthDate = birthDate
         ) }
     }
+
+    fun onGenderSelected(gender: String){
+        _state.update { it.copy(
+            selectedGender = gender
+        ) }
+    }
+
+    fun updateInterests(interest: String) {
+        _state.update { currentState ->
+            val updatedList = if (currentState.bio.contains(interest)) {
+                currentState.bio - interest
+            } else {
+                currentState.bio + interest
+            }
+
+            currentState.copy(
+                bio = updatedList
+            )
+        }
+    }
+
+    fun isInterestSelected(interest: String): Boolean{
+        return _state.value.bio.contains(interest)
+    }
 }

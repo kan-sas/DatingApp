@@ -21,6 +21,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.PhotoCamera
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -170,17 +171,17 @@ fun ProfileDetailsScreen(
                     ) {
                         Box(
                             modifier = Modifier
-                                .padding(horizontal = 4.dp, vertical = 8.dp)
                                 .clip(CircleShape)
                                 .background(primaryContainerDark)
                                 .size(50.dp)
                         )
-                        Image(
-                            painter = painterResource(R.drawable.camera_icon),
+                        Icon(
+                            imageVector = Icons.Filled.PhotoCamera,
                             contentDescription = stringResource(R.string.change_profile_photo),
-                            colorFilter = ColorFilter.tint(Color.White),
+                            tint = Color.White,
                             modifier = Modifier
-                                .size(60.dp)
+                                .padding(start = 8.dp, top = 8.dp)
+                                .size(32.dp)
                         )
                     }
                 }

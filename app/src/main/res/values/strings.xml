@@ -50,4 +50,12 @@
     <string name="previous_month">Previous month</string>
     <string name="next_month">Next month</string>
     <string name="save">Save</string>
+    <string name="i_am_a">I am a</string>
+    <string name="back_to_profile_details">back to profile details</string>
+    <string name="your_interests">Your interests</string>
+    <string name="select_a_few_of_your_interests_and_let_everyone_know_what_you_re_passionate_about">Select a few of your interests and let everyone know what you’re passionate about.</string>
+    <string name="get_push_notification_when_you_get_the_match_or_receive_a_message">Get push-notification when you get the match or receive a message.</string>
+    <string name="enable_notification_s">Enable notification’s</string>
+    <string name="i_want_to_be_notified">I want to be notified</string>
+    <string name="notification_icon">notification icon</string>
 </resources>

@@ -25,6 +25,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.OutlinedIconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -41,7 +42,29 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ubersoftink.datingapp.R
 import com.ubersoftink.datingapp.ui.theme.AppTypography
+import com.ubersoftink.datingapp.ui.theme.primaryContainerDark
 import com.ubersoftink.datingapp.ui.theme.primaryContainerLight
+
+@Composable
+fun NavigateBackButton(
+    navigateUp: () -> Unit,
+    modifier: Modifier = Modifier,
+    contentDescription: String
+){
+    OutlinedIconButton(
+        onClick = navigateUp,
+        shape = RoundedCornerShape(16.dp),
+        modifier = modifier,
+        border = BorderStroke(1.dp, Color.LightGray)
+    ) {
+        Icon(
+            imageVector = Icons.Filled.KeyboardArrowLeft,
+            contentDescription = contentDescription,
+            tint = primaryContainerDark,
+            modifier = Modifier.size(32.dp)
+        )
+    }
+}
 
 @Composable
 fun ClickableText(
