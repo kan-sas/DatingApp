@@ -5,7 +5,7 @@ import retrofit2.http.GET
 
 private const val IMAGES_SEARCH = "images/search?limit=32"
 
-interface ClientApiServiceImpl: ClientApiService {
+interface CatApiServiceImpl: CatApiService {
     @GET(IMAGES_SEARCH)
     override suspend fun getImages(): List<CatResponse>
 

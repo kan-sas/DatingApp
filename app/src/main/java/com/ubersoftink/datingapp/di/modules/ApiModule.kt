@@ -1,7 +1,7 @@
 package com.ubersoftink.datingapp.di.modules
 
 import com.ubersoftink.datingapp.BuildConfig
-import com.ubersoftink.datingapp.network.ClientApiServiceImpl
+import com.ubersoftink.datingapp.network.CatApiServiceImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,8 +16,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object ApiModule {
 
-    private  const val BASE_URL = BuildConfig.BASE_URL
-
+    private const val BASE_URL = BuildConfig.BASE_URL
     private const val API_KEY = BuildConfig.API_KEY
 
     @Singleton
@@ -49,5 +48,5 @@ object ApiModule {
 
     @Singleton
     @Provides
-    fun providesCatService(retrofit: Retrofit) = retrofit.create(ClientApiServiceImpl::class.java)
+    fun providesCatService(retrofit: Retrofit) = retrofit.create(CatApiServiceImpl::class.java)
 }

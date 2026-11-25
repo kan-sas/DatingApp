@@ -10,6 +10,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import androidx.navigation.navigation
 import com.ubersoftink.datingapp.ui.screens.CatsListScreen
+import com.ubersoftink.datingapp.ui.screens.MainScreen
 import com.ubersoftink.datingapp.ui.screens.code.CodeVerificationScreen
 import com.ubersoftink.datingapp.ui.screens.number.NumberScreen
 import com.ubersoftink.datingapp.ui.screens.signup.SignUpScreen
@@ -40,98 +41,9 @@ fun AppNavGraph() {
                 }
             )
         }
-        composable(route = Routes.SIGN_UP) {
-            SignUpScreen(enterByPhoneNumberButton = {
-                navController.navigate(Routes.NUMBER_ENTER)
-            })
-        }
-        composable(route = Routes.NUMBER_ENTER) {
-            NumberScreen(
-                onContinueButton = { verificationId, phoneNumber ->
-                    navController.navigate("${Routes.VERIFICATION_SCREEN}/$verificationId/$phoneNumber")
-                }
-            )
-        }
-        composable(
-            route = "${Routes.VERIFICATION_SCREEN}/{verificationId}/{phoneNumber}",
-            arguments = listOf(
-                navArgument("verificationId") {
-                    type = NavType.StringType
-                    nullable = true
-                },
-                navArgument("phoneNumber"){
-                    type = NavType.StringType
-                    nullable = true
-                }
-            )
-        ) { backStackEntry ->
-            val phoneNumber = backStackEntry.arguments?.getString("phoneNumber")
-            val verificationId = backStackEntry.arguments?.getString("verificationId")
-            CodeVerificationScreen(
-                navigateUp = {
-                    navController.navigate(Routes.NUMBER_ENTER) {
-                        popUpTo(Routes.NUMBER_ENTER) { inclusive = false }
-                    }
-                },
-                verificationId = verificationId,
-                phoneNumber = phoneNumber,
-                toProfileDetails = {
-                    navController.navigate(Graph.REGISTRATION) {
-                        popUpTo(Routes.NUMBER_ENTER) { inclusive = true }
-                    }
-                }
-            )
-        }
-        navigation(
-            startDestination = Routes.PROFILE_DETAILS,
-            route = Graph.REGISTRATION
-        ) {
-            composable(route = Routes.PROFILE_DETAILS) { backStackEntry ->
-                val parentEntry = remember(backStackEntry) {
-                    navController.getBackStackEntry(Graph.REGISTRATION)
-                }
-                val sharedViewModel = hiltViewModel<RegistrationViewModel>(parentEntry)
 
-                ProfileDetailsScreen(
-                    regViewModel = sharedViewModel,
-                    onSkipClick = { navController.navigate(Routes.I_AM) },
-                    toSexScreen = { navController.navigate(Routes.I_AM) }
-                )
-            }
+        registrationGraph(navController)
 
-            composable(route = Routes.I_AM) { backStackEntry ->
-                val parentEntry = remember(backStackEntry) {
-                    navController.getBackStackEntry(Graph.REGISTRATION)
-                }
-                val sharedViewModel = hiltViewModel<RegistrationViewModel>(parentEntry)
-
-                SexScreen(
-                    viewModel = sharedViewModel,
-                    onBackClick = { navController.popBackStack() },
-                    onContinueClick = { navController.navigate(Routes.PASSIONS) },
-                    onSkipClick = { navController.navigate(Routes.PASSIONS) }
-                )
-            }
-
-            composable(route = Routes.PASSIONS) { backStackEntry ->
-                val parentEntry = remember(backStackEntry) {
-                    navController.getBackStackEntry(Graph.REGISTRATION)
-                }
-                val sharedViewModel = hiltViewModel<RegistrationViewModel>(parentEntry)
-
-                InterestsScreen(
-                    viewModel = sharedViewModel,
-                    onBackClick = { navController.popBackStack() },
-                    onContinueClick = { navController.navigate(Routes.ENABLE_NOTIFICATIONS) },
-                    onSkipClick = { navController.navigate(Routes.ENABLE_NOTIFICATIONS) }
-                )
-            }
-            composable(route = Routes.ENABLE_NOTIFICATIONS) { backStackEntry ->
-                NotificationsScreen(
-                    onSkipClick = { },
-                    onNotifyClick = {  }
-                )
-            }
-        }
+        mainGraph(navController)
     }
 }

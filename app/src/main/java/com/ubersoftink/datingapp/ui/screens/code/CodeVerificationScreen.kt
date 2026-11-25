@@ -18,6 +18,7 @@ import androidx.compose.material3.OutlinedIconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -39,26 +40,27 @@ import com.ubersoftink.datingapp.ui.theme.AppTypography
 import com.ubersoftink.datingapp.ui.theme.primaryContainerDark
 import com.ubersoftink.datingapp.ui.viewmodels.OtpAction
 import com.ubersoftink.datingapp.ui.viewmodels.OtpViewModel
+import com.ubersoftink.datingapp.ui.viewmodels.RegistrationViewModel
 import kotlinx.coroutines.delay
 
 @Composable
 fun CodeVerificationScreen(
     modifier: Modifier = Modifier,
     navigateUp: () -> Unit,
-    phoneNumber: String?,
+    regViewModel: RegistrationViewModel = hiltViewModel<RegistrationViewModel>(),
     viewModel: OtpViewModel = hiltViewModel<OtpViewModel>(),
-    verificationId: String?,
     toProfileDetails: () -> Unit,
 ){
+    val regState by regViewModel.state.collectAsState()
     val state by viewModel.state.collectAsStateWithLifecycle()
     val context = LocalContext.current
     val focusRequesters = remember {
         (1..6).map { FocusRequester() }
     }
 
-    LaunchedEffect(verificationId) {
-        if (verificationId != null) {
-            viewModel.updateVerificationId(verificationId)
+    LaunchedEffect(regState.verificationId) {
+        if (regState.verificationId != null) {
+            viewModel.updateVerificationId(regState.verificationId)
         } else {
             Log.e("CodeVerification", "Verification ID is null")
         }
@@ -173,7 +175,7 @@ fun CodeVerificationScreen(
                 onClick = {
                     viewModel.phoneAuthentication(
                         context,
-                        phoneNumber = phoneNumber
+                        phoneNumber = regState.phoneNumber
                     )
                 },
                 colors = CardDefaults.cardColors(MaterialTheme.colorScheme.surface)
@@ -192,5 +194,5 @@ fun CodeVerificationScreen(
 @Composable
 @Preview(showBackground = true)
 fun CodeVerificationPreview(){
-    CodeVerificationScreen(navigateUp = {}, verificationId = "", phoneNumber = "", toProfileDetails = {})
+    CodeVerificationScreen(navigateUp = {}, toProfileDetails = {})
 }

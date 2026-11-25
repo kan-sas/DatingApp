@@ -1,7 +1,9 @@
 package com.ubersoftink.datingapp.di.modules
 
-import com.ubersoftink.datingapp.network.ClientApiService
-import com.ubersoftink.datingapp.network.ClientApiServiceImpl
+import com.ubersoftink.datingapp.network.CatApiService
+import com.ubersoftink.datingapp.network.CatApiServiceImpl
+import com.ubersoftink.datingapp.network.AuthService
+import com.ubersoftink.datingapp.network.AuthServiceImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -12,7 +14,13 @@ import dagger.hilt.components.SingletonComponent
 abstract class NetworkModule {
 
     @Binds
-    abstract fun bindClientServiceImpl(
-        catsServiceImpl: ClientApiServiceImpl
-    ): ClientApiService
+    abstract fun bindCatServiceImpl(
+        catsServiceImpl: CatApiServiceImpl
+    ): CatApiService
+
+
+    @Binds
+    abstract fun bindAuthServiceImpl(
+        authServiceImpl: AuthServiceImpl
+    ): AuthService
 }

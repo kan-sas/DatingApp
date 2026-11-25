@@ -2,7 +2,7 @@ package com.ubersoftink.datingapp.network
 
 import com.ubersoftink.datingapp.data.models.CatResponse
 
-interface ClientApiService {
+interface CatApiService {
 
     suspend fun getImages(): List<CatResponse>
 }

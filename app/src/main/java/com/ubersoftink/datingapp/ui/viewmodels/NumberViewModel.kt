@@ -30,6 +30,7 @@ class NumberViewModel: ViewModel() {
         onContinueButton: (String, String) -> Unit,
     ){
         val phoneNumber = "+${_state.value.phoneCode}${_state.value.numberWithoutCode}"
+
         val options = PhoneAuthOptions.newBuilder(Firebase.auth)
             .setPhoneNumber(phoneNumber)
             .setTimeout(60L, TimeUnit.SECONDS)

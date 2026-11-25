@@ -58,4 +58,5 @@
     <string name="enable_notification_s">Enable notification’s</string>
     <string name="i_want_to_be_notified">I want to be notified</string>
     <string name="notification_icon">notification icon</string>
+    <string name="name_and_last_name_can_not_be_empty">Name, last name and profile picture can not be empty</string>
 </resources>

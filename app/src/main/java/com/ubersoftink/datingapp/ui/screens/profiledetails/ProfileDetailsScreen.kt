@@ -26,6 +26,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SheetValue
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberBottomSheetScaffoldState
@@ -116,14 +117,15 @@ fun ProfileDetailsScreen(
             modifier = Modifier
                 .fillMaxSize()
         ) {
-            ClickableText(
+            /*ClickableText(
                 onClick = onSkipClick,
                 modifier = Modifier
                     .padding(top = 56.dp, end = 41.dp)
                     .align(Alignment.End),
                 text = stringResource(R.string.skip),
                 style = AppTypography.titleLarge
-            )
+            )*/
+            Spacer(modifier = Modifier.padding(60.dp))
             Text(
                 text = stringResource(R.string.profile_details),
                 style = AppTypography.displaySmall,
@@ -226,14 +228,37 @@ fun ProfileDetailsScreen(
                         )
                     }
                 }
-                Spacer(modifier = Modifier.padding(48.dp))
+                Spacer(modifier = Modifier.padding(20.dp))
+                if (regState.showWarning) {
+                    WarningText(MaterialTheme.colorScheme.error)
+                }else{
+                    WarningText(MaterialTheme.colorScheme.background)
+                }
+
+                Spacer(modifier = Modifier.padding(12.dp))
                 ButtonWithText(
-                    onClick = { toSexScreen() },
+                    onClick = {
+                        regViewModel.isNameFieldFilled()
+                        if(regState.buttonIsClickable) {
+                            toSexScreen()
+                        }
+                    },
                     text = stringResource(R.string.confirm)
                 )
             }
         }
     }
+}
+
+@Composable
+fun WarningText(
+    color: Color
+){
+    Text(
+        text = stringResource(R.string.name_and_last_name_can_not_be_empty),
+        style = AppTypography.bodyMedium,
+        color = color
+    )
 }
 
 @Composable

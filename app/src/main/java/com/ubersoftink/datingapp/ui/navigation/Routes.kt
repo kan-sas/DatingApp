@@ -10,7 +10,10 @@ object Routes {
     const val I_AM = "i_am"
     const val PASSIONS = "passions"
     const val ENABLE_NOTIFICATIONS = "enable_notifications"
+    const val MAIN_SCREEN = "main_screen"
 }
 object Graph {
     const val REGISTRATION = "registration_graph"
+    const val AUTHENTICATION = "auth_graph"
+    const val MAIN = "main_graph"
 }

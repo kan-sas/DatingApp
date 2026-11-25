@@ -1,5 +1,10 @@
 package com.ubersoftink.datingapp.ui.screens.profiledetails
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -7,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -14,6 +20,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat
 import com.ubersoftink.datingapp.R
 import com.ubersoftink.datingapp.ui.components.ButtonWithText
 import com.ubersoftink.datingapp.ui.components.ClickableText
@@ -21,21 +28,30 @@ import com.ubersoftink.datingapp.ui.theme.AppTypography
 
 @Composable
 fun NotificationsScreen(
-    onSkipClick: () -> Unit = {},
-    onNotifyClick: () -> Unit = {}
+    onSkipClick: () -> Unit,
+    onNotifyClick: () -> Unit
 ) {
-
+    val context = LocalContext.current
+    val permissionLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission()
+    ) { isGranted ->
+        if(isGranted) {
+            // Здесь обрабатываем результат
+        }else{
+            //Отклонил
+        }
+        onNotifyClick()
+    }
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(horizontal = 24.dp, vertical = 24.dp),
+            .padding(horizontal = 24.dp, vertical = 40.dp),
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Row(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 16.dp),
+                .fillMaxWidth(),
             horizontalArrangement = Arrangement.End,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -80,7 +96,23 @@ fun NotificationsScreen(
         }
 
         ButtonWithText(
-            onClick = onNotifyClick,
+            onClick = {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    when {
+                        ContextCompat.checkSelfPermission(
+                            context,
+                            Manifest.permission.POST_NOTIFICATIONS
+                        ) == PackageManager.PERMISSION_GRANTED -> {
+                            onNotifyClick()
+                        }
+                        else -> {
+                            permissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                        }
+                    }
+                } else {
+                    onNotifyClick()
+                }
+            },
             text = stringResource(R.string.i_want_to_be_notified),
             modifier = Modifier.height(56.dp)
         )
@@ -90,5 +122,8 @@ fun NotificationsScreen(
 @Composable
 @Preview(showBackground = true)
 fun NotificationPreview(){
-    NotificationsScreen()
+    NotificationsScreen(
+        onSkipClick = {},
+        onNotifyClick = {}
+    )
 }
